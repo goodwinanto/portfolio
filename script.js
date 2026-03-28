@@ -93,4 +93,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 5. Subtle Parallax for hero background (desktop only, disabled on mobile)
+    const heroBg = document.querySelector('.hero-gradient');
+    if (heroBg && window.matchMedia('(min-width: 769px)').matches) {
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(() => {
+                const scrolled = window.scrollY;
+                // Only animate while in view
+                if (scrolled < window.innerHeight) {
+                    heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+        }, { passive: true });
+    }
+
 });
