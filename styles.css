@@ -272,6 +272,13 @@ a {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: -1;
+    background-image: url('assets/hero_bg_core.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
+    -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
 }
 
 .hero-gradient {
