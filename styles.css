@@ -295,6 +295,13 @@ a {
     opacity: 0.25;
     mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
     -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
+    animation: breathe 20s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes breathe {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
 }
 
 .hero-gradient {
@@ -726,6 +733,10 @@ a {
 
 /* Reduce animations on mobile and preferences */
 @media (max-width: 768px) {
+    .hero-bg {
+        animation: none !important;
+        transform: scale(1) !important;
+    }
     .hero-gradient {
         animation: none !important;
         display: none;
