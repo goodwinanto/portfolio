@@ -304,6 +304,14 @@ a {
     align-items: center;
 }
 
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
 .nav-links a {
     font-size: 0.85rem;
     color: var(--text-secondary);

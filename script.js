@@ -207,8 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                document.body.classList.remove('nav-active');
-                gsap.to(navLinks, { opacity: 0, y: -20, duration: 0.3, onComplete: () => window.innerWidth <= 768 && (navLinks.style.display = 'none') });
+                if (window.innerWidth <= 768) {
+                    document.body.classList.remove('nav-active');
+                    gsap.to(navLinks, { opacity: 0, y: -20, duration: 0.3, onComplete: () => navLinks.style.display = 'none' });
+                }
             });
         });
     }
