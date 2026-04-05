@@ -846,5 +846,167 @@ a {
 }
 
 @media (max-width: 768px) {
-    .btn-hire { display: none; }
+    /* Global Anti-Overflow & Constraints */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100vw;
+    }
+    
+    .section {
+        padding: 5rem 1.25rem;
+    }
+    
+    .container {
+        padding: 0;
+    }
+
+    /* Touch Targets */
+    a, button, .btn {
+        min-height: 48px;
+    }
+
+    /* Navigation */
+    .nav-content {
+        padding: 1rem 1.25rem;
+        justify-content: space-between !important;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100vw !important;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 0;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        box-sizing: border-box;
+    }
+    
+    .nav-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 54px;
+        font-size: 1rem;
+        padding: 0;
+    }
+    
+    .btn-hire { display: none !important; }
+
+    /* Hero Section */
+    .hero-section {
+        padding-top: 8rem;
+    }
+
+    .hero-section h1 {
+        font-size: clamp(3rem, 12vw, 5.5rem);
+    }
+
+    .hero-section h2 {
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hero-tagline {
+        font-weight: 400 !important;
+        font-size: clamp(1.4rem, 4.5vw, 2rem) !important;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+    }
+
+    /* About Section */
+    .grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 3rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* Services Section */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .service-card {
+        width: 100%;
+        padding: 1.5rem 1.25rem;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+        gap: 4rem;
+    }
+
+    .project-card {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        padding: 2rem 0 0 0;
+    }
+    
+    .project-card h3 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+    
+    .project-card p {
+        font-size: 1.05rem;
+    }
+
+    /* Experience Section Sizing Matching */
+    .section-header h2, .grid-2 .section-header h2 {
+        font-size: clamp(2.2rem, 8vw, 3rem) !important;
+    }
+    
+    .timeline-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 2rem 0;
+    }
+
+    /* Contact Section */
+    .contact-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+    
+    .contact-links .btn {
+        width: 100%;
+    }
+}
+
+/* Completely Disable Custom Cursor on Phone/Tablet Hardware */
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor, .custom-cursor-follower {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    body, a, button, .hover-target, .service-card, .project-card, input {
+        cursor: auto !important;
+    }
 }
