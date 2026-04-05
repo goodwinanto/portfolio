@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodwin Anto | AI Engineer & DevOps Specialist</title>
-    <meta name="description" content="Portfolio of Goodwin Anto - Building intelligent systems that actually work.">
+    <title>Goodwin Anto | Azure DevOps & AI Engineer</title>
+    <meta name="description" content="Goodwin Anto — Azure cloud infrastructure, DevOps automation, and LLM/RAG integration for teams that need things shipped.">
     
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,146 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ── SERVICES SECTION ─────────────────────────────── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: all var(--transition-base);
+        }
+
+        .service-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .service-icon {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 0.25rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: auto;
+            padding-top: 0.5rem;
+        }
+
+        .service-tags span {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.55rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+        }
+
+        /* ── HIRE ME NAV BUTTON ───────────────────────────── */
+        .btn-hire {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-weight: 500;
+            background: var(--text-primary);
+            color: var(--bg-main);
+            border: 1px solid transparent;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-hire:hover {
+            background: #ffffff;
+            box-shadow: 0 0 14px rgba(255,255,255,0.2);
+        }
+
+        .btn-hire .hire-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── AVAILABILITY PILL ────────────────────────────── */
+        .avail-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(34,197,94,0.3);
+            background: rgba(34,197,94,0.06);
+            font-size: 0.8rem;
+            color: #86efac;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ── IMPACT BADGE ON PROJECTS ─────────────────────── */
+        .impact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: #86efac;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── SECTION LEAD TEXT ────────────────────────────── */
+        .section-lead {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin-top: -2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .btn-hire { display: none; }
+        }
+    </style>
 </head>
 <body>
     <div id="noise"></div>
@@ -28,10 +168,15 @@
             </button>
             <div class="nav-links">
                 <a href="#about">About</a>
+                <a href="#services">Services</a>
                 <a href="#projects">Projects</a>
                 <a href="#experience">Experience</a>
                 <a href="#contact">Contact</a>
             </div>
+            <!-- ✦ Hire me CTA in nav -->
+            <a href="#contact" class="btn-hire">
+                <span class="hire-dot"></span> Hire me
+            </a>
         </div>
     </nav>
 
@@ -43,17 +188,23 @@
             </div>
             <div class="container fade-in">
                 <div class="hero-content">
-                    <div class="badge fade-in" style="transition-delay: 0.1s">
-                        <span class="pulse-dot"></span> Available for new opportunities
+                    <!-- ✦ Availability signal — specific and freelance-oriented -->
+                    <div class="avail-pill fade-in" style="transition-delay: 0.1s">
+                        <span class="pulse-dot"></span> Available for freelance &amp; contracts — April 2026
                     </div>
                     <h1 class="fade-in" style="transition-delay: 0.2s">Goodwin Anto</h1>
-                    <h2 class="fade-in" style="transition-delay: 0.3s">AI Engineer & DevOps Specialist.</h2>
+                    <!-- ✦ Value-first subtitle -->
+                    <h2 class="fade-in" style="transition-delay: 0.3s">Azure DevOps &amp; AI Engineer.</h2>
+                    <!-- ✦ Hero tagline rewritten to speak to clients, not recruiters -->
                     <p class="hero-tagline fade-in" style="transition-delay: 0.4s">
-                        "Building intelligent systems that actually work."
+                        Building intelligent systems that actually work.
+                    </p>
+                    <p class="fade-in" style="transition-delay: 0.45s; max-width: 560px; color: var(--text-secondary); font-size: 1rem;">
+                        3 years shipping DevOps automation and LLM-powered systems for enterprise clients.
                     </p>
                     <div class="hero-cta fade-in" style="transition-delay: 0.5s">
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
-                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                        <a href="#contact" class="btn btn-primary">Work with me</a>
+                        <a href="#projects" class="btn btn-secondary">See my work</a>
                     </div>
                 </div>
             </div>
@@ -71,8 +222,9 @@
                 </div>
                 <div class="about-content grid-2">
                     <div class="about-text">
-                        <p>I am a multifaceted technical professional with 3 years of experience specializing in Azure cloud infrastructure, DevOps practices, and AI/automation.</p>
-                        <p>My current focus is fundamentally centered around building production-ready AI-powered systems and advanced RAG (Retrieval-Augmented Generation) pipelines that solve real enterprise problems.</p>
+                        <p>I am a DevOps and AI engineer with 3 years of experience at Accenture, working on cloud infrastructure, automation pipelines, and enterprise AI integrations for Fortune 500 clients across financial services and luxury retail.</p>
+                        <p>I specialise in Azure/AKS infrastructure, Terraform IaC, CI/CD pipeline engineering, and building production-ready LLM and RAG-based systems. Beyond that, I architect and build custom automations — API integrations, browser agents, workflow tooling — and can take an AI concept from design to deployment end-to-end.</p>
+                        <p>Currently open to freelance contracts and consulting engagements. I work best with teams that need things shipped, not over-architected.</p>
                     </div>
                     
                     <!-- SKILLS SECTION (Nested in About visually) -->
@@ -88,7 +240,7 @@
                             <span class="skill-tag"><i class="ph ph-brain"></i> LLM/RAG</span>
                             <span class="skill-tag"><i class="ph ph-link"></i> LangChain</span>
                             <span class="skill-tag"><i class="ph ph-terminal"></i> PowerShell</span>
-                            <span class="skill-tag"><i class="ph ph-git-merge"></i> Azure Devops</span>
+                            <span class="skill-tag"><i class="ph ph-git-merge"></i> Azure DevOps</span>
                             <span class="skill-tag"><i class="ph ph-lightning"></i> Rundeck</span>
                         </div>
                     </div>
@@ -96,15 +248,69 @@
             </div>
         </section>
 
+        <!-- ✦ SERVICES SECTION — new, freelance-critical -->
+        <section id="services" class="section alternate-bg">
+            <div class="container fade-in">
+                <div class="section-header">
+                    <h2>What I can do for you</h2>
+                </div>
+                <p class="section-lead">Focused services for teams that need cloud, automation, or AI work done properly.</p>
+                <div class="services-grid">
+
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="ph ph-cloud"></i></div>
+                        <h3>Azure Cloud &amp; AKS Infrastructure</h3>
+                        <p>End-to-end Azure infrastructure provisioning, AKS cluster management, cost optimisation, and policy enforcement for production workloads.</p>
+                        <div class="service-tags">
+                            <span>Azure</span><span>AKS</span><span>Terraform</span><span>IaC</span><span>Kubernetes</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in" style="transition-delay: 0.1s">
+                        <div class="service-icon"><i class="ph ph-arrows-merge"></i></div>
+                        <h3>DevOps &amp; CI/CD Automation</h3>
+                        <p>Pipeline design, Rundeck workflow automation, infrastructure-as-code, and release engineering that cuts deploy time and manual overhead.</p>
+                        <div class="service-tags">
+                            <span>Azure DevOps</span><span>CI/CD</span><span>Rundeck</span><span>Docker</span><span>PowerShell</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in" style="transition-delay: 0.2s">
+                        <div class="service-icon"><i class="ph ph-brain"></i></div>
+                        <h3>LLM &amp; RAG Integration</h3>
+                        <p>Production-ready AI pipelines — chatbots, document Q&amp;A systems, and ITSM automation — built with LangChain, ChromaDB, and open-source LLMs.</p>
+                        <div class="service-tags">
+                            <span>LangChain</span><span>RAG</span><span>LLaMA 3</span><span>Groq</span><span>ChromaDB</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card fade-in" style="transition-delay: 0.3s">
+                        <div class="service-icon"><i class="ph ph-puzzle-piece"></i></div>
+                        <h3>Custom Automation &amp; Integrations</h3>
+                        <p>If it's repetitive, it can be automated. I design and build custom workflows, API integrations, browser automation, and tooling that slots into whatever stack you already have.</p>
+                        <div class="service-tags">
+                            <span>Python</span><span>Playwright</span><span>REST APIs</span><span>Webhooks</span><span>Scripting</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ✦ Soft pricing signal -->
+                <p style="margin-top: 2rem; font-size: 0.88rem; color: var(--text-muted); text-align: center;">
+                    Project-based and hourly engagements available. <a href="#contact" style="color: var(--text-secondary); text-decoration: underline; text-underline-offset: 3px;">Let's scope it out →</a>
+                </p>
+            </div>
+        </section>
+
         <!-- PROJECTS SECTION -->
-        <section id="projects" class="section alternate-bg">
+        <section id="projects" class="section">
             <div class="container fade-in">
                 <div class="section-header">
                     <h2>Selected Projects</h2>
                 </div>
                 
                 <div class="projects-grid">
-                    <!-- Project 1 -->
+                    <!-- Project 1 — DocuMind RAG -->
                     <div class="project-card fade-in">
                         <div class="project-header">
                             <div class="project-icon"><i class="ph ph-file-text"></i></div>
@@ -112,8 +318,10 @@
                                 <a href="https://github.com/goodwinanto" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
                             </div>
                         </div>
+                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source</div>
                         <h3>DocuMind RAG</h3>
-                        <p>End-to-end RAG pipeline enabling PDF ingestion, querying, and answering with precise source citations. Built using LangChain, ChromaDB, Groq, and Streamlit.</p>
+                        <!-- ✦ Outcome-framed description -->
+                        <p>Turns any PDF into a queryable knowledge base with source-cited answers. Eliminates manual document search — query instead of scroll. Built with LangChain, ChromaDB, Groq, and Streamlit.</p>
                         <div class="project-tech">
                             <span>LangChain</span>
                             <span>ChromaDB</span>
@@ -122,7 +330,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
+                    <!-- Project 2 — AirMigrate -->
                     <div class="project-card fade-in" style="transition-delay: 0.1s">
                         <div class="project-header">
                             <div class="project-icon"><i class="ph ph-paper-plane-tilt"></i></div>
@@ -130,8 +338,10 @@
                                 <a href="https://github.com/goodwinanto" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
                             </div>
                         </div>
+                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source</div>
                         <h3>AirMigrate</h3>
-                        <p>iPhone-to-Linux media transfer tool featuring SHA-256 verification, intelligent auto-organisation, and Apple Live Photo detection. Built with Python and customtkinter.</p>
+                        <!-- ✦ Outcome-framed -->
+                        <p>Migrates iPhone media to Linux with zero data loss — SHA-256 verification, intelligent auto-organisation, and Apple Live Photo detection. Solves a pain every Linux user with an iPhone knows.</p>
                         <div class="project-tech">
                             <span>Python</span>
                             <span>customtkinter</span>
@@ -139,23 +349,26 @@
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
+                    <!-- Project 3 — IT Support Chatbot (enterprise framing) -->
                     <div class="project-card fade-in" style="transition-delay: 0.2s">
                         <div class="project-header">
                             <div class="project-icon"><i class="ph ph-chat-teardrop-dots"></i></div>
-                            <div class="project-links">
-                            </div>
+                            <div class="project-links"></div>
                         </div>
-                        <h3>IT Support Chatbot</h3>
-                        <p>Enterprise helpbot with RAG-based automated resolution, incident ticket creation, and complex conversational workflows. Deployed for a Fortune 500 financial client.</p>
+                        <!-- ✦ Enterprise credibility badge -->
+                        <div class="impact-badge"><i class="ph ph-buildings" style="font-size:0.75rem"></i> Fortune 500 deployment</div>
+                        <h3>Enterprise IT Support Chatbot</h3>
+                        <!-- ✦ Problem → outcome framing -->
+                        <p>Reduced L1 support overhead for a Fortune 500 financial client by automating ticket triage, resolution, and ITSM workflows via a RAG-powered Microsoft Teams bot. Complex conversational flows with adaptive card UI.</p>
                         <div class="project-tech">
                             <span>RAG</span>
-                            <span>Enterprise Integration</span>
-                            <span>Conversational AI</span>
+                            <span>MS Teams</span>
+                            <span>Adaptive Cards</span>
+                            <span>ITSM Integration</span>
                         </div>
                     </div>
 
-                    <!-- Project 4 -->
+                    <!-- Project 4 — Job Application Automator -->
                     <div class="project-card fade-in" style="transition-delay: 0.3s">
                         <div class="project-header">
                             <div class="project-icon"><i class="ph ph-robot"></i></div>
@@ -163,12 +376,15 @@
                                 <a href="https://github.com/goodwinanto" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
                             </div>
                         </div>
+                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source</div>
                         <h3>Job Application Automator</h3>
-                        <p>AI-powered browser automation bot utilizing Playwright and Groq (LLaMA 3) to intelligently parse forms and automate job applications at scale.</p>
+                        <!-- ✦ More concrete framing -->
+                        <p>Cuts job application time from minutes to seconds. An AI browser agent that intelligently parses and fills application forms at scale — built with Playwright and LLaMA 3 via Groq.</p>
                         <div class="project-tech">
                             <span>Playwright</span>
                             <span>LLaMA 3</span>
                             <span>Groq</span>
+                            <span>Browser Automation</span>
                         </div>
                     </div>
                 </div>
@@ -176,7 +392,7 @@
         </section>
 
         <!-- EXPERIENCE & EDUCATION SECTION -->
-        <section id="experience" class="section">
+        <section id="experience" class="section alternate-bg">
             <div class="container fade-in">
                 <div class="grid-2">
                     
@@ -189,9 +405,13 @@
                             <div class="timeline-item">
                                 <div class="timeline-dot"></div>
                                 <div class="timeline-content">
-                                    <div class="timeline-date">2024 &mdash; Present</div>
+                                    <div class="timeline-date">2024 &mdash; 2026</div>
                                     <h3 class="timeline-title">Automation Developer</h3>
                                     <h4 class="timeline-company">Accenture</h4>
+                                    <!-- ✦ Brief impact line -->
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; margin-bottom: 0;">
+                                        Built RAG chatbots and DevOps automation for Fortune 500 financial &amp; luxury retail clients on Azure/AKS.
+                                    </p>
                                 </div>
                             </div>
                             <div class="timeline-item">
@@ -200,6 +420,9 @@
                                     <div class="timeline-date">2023 &mdash; 2024</div>
                                     <h3 class="timeline-title">Cloud Engineer</h3>
                                     <h4 class="timeline-company">Accenture</h4>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; margin-bottom: 0;">
+                                        Azure infrastructure provisioning, IaC with Terraform, incident response and cloud policy enforcement.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +431,7 @@
                     <!-- Education & Certs -->
                     <div>
                         <div class="section-header">
-                            <h2>Education & Certifications</h2>
+                            <h2>Education &amp; Certifications</h2>
                         </div>
                         
                         <!-- Education Card -->
@@ -224,12 +447,12 @@
                         <h3 class="certs-title">Certifications</h3>
                         <div class="certs-grid">
                             <div class="cert-badge">
-                                <i class="ph ph-certificate"></i>
-                                AZ-900 (Microsoft Azure Fundamentals)
+                                <i class="ph ph-seal-check"></i>
+                                AZ-900 — Microsoft Azure Fundamentals
                             </div>
                             <div class="cert-badge">
-                                <i class="ph ph-certificate"></i>
-                                Terraform Associate
+                                <i class="ph ph-seal-check"></i>
+                                Terraform Associate — HashiCorp
                             </div>
                         </div>
                     </div>
@@ -238,16 +461,20 @@
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="section alternate-bg">
+        <!-- CONTACT SECTION — rewritten for clients, not recruiters -->
+        <section id="contact" class="section">
             <div class="container fade-in">
                 <div class="contact-box">
-                    <h2>Ready to collaborate?</h2>
-                    <p>I am always open to discussing modern systems, intelligent infrastructure, and new opportunities.</p>
+                    <div class="avail-pill" style="margin: 0 auto 1.5rem;">
+                        <span class="pulse-dot"></span> Open for work — April 2026
+                    </div>
+                    <h2>Let's build something.</h2>
+                    <!-- ✦ Client-facing copy -->
+                    <p>Have a cloud migration, automation backlog, or AI integration in mind? I take on freelance contracts and short-to-medium term consulting engagements. Let's scope it out.</p>
                     
                     <div class="contact-links">
                         <a href="mailto:goodwinantoofficial@gmail.com" class="btn btn-primary btn-lg">
-                            <i class="ph ph-envelope-simple"></i> goodwinantoofficial@gmail.com
+                            <i class="ph ph-envelope-simple"></i> Get in touch
                         </a>
                         <a href="https://linkedin.com/in/goodwin-anto" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">
                             <i class="ph ph-linkedin-logo"></i> LinkedIn
@@ -256,6 +483,9 @@
                             <i class="ph ph-github-logo"></i> GitHub
                         </a>
                     </div>
+                    <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                        Typical response time: within 24 hours.
+                    </p>
                 </div>
             </div>
         </section>
@@ -264,7 +494,7 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <p>Goodwin Anto &copy; 2024. All rights reserved.</p>
+                <p>Goodwin Anto &copy; 2025. All rights reserved.</p>
             </div>
             <div class="footer-links">
                 <a href="#hero">Back to Top <i class="ph ph-arrow-up"></i></a>
