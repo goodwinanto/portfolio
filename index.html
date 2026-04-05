@@ -6,10 +6,14 @@
     <title>Goodwin Anto | Azure DevOps & AI Engineer</title>
     <meta name="description" content="Goodwin Anto — Azure cloud infrastructure, DevOps automation, and LLM/RAG integration for teams that need things shipped.">
     
-    <!-- Google Fonts: Inter -->
+    <!-- Fonts: Geist & Clash Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons for elegant minimalist icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -157,8 +161,14 @@
     </style>
 </head>
 <body>
+    <!-- ✦ Custom Cursor Elements -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- ✦ Ambient Grain and Glow -->
     <div id="noise"></div>
     <div id="ambient-bg"></div>
+    <div class="cursor-glow"></div>
     
     <nav class="navbar">
         <div class="nav-content">
@@ -494,14 +504,19 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <p>Goodwin Anto &copy; 2025. All rights reserved.</p>
+                <p>Goodwin Anto &copy; 2026. All rights reserved.</p>
             </div>
             <div class="footer-links">
-                <a href="#hero">Back to Top <i class="ph ph-arrow-up"></i></a>
+                <a href="#hero" class="hover-target">Back to Top <i class="ph ph-arrow-up"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- ✦ Core Libraries for Premium Feel -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
