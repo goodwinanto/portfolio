@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://goodwinanto.vercel.app/sitemap.xml
+Sitemap: https://portfolio-goodwinanto.vercel.app/sitemap.xml
