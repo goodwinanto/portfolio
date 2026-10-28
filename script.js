@@ -170,7 +170,11 @@
         gsap.to('.layer-grid', { yPercent: 22, ease: 'none', scrollTrigger: heroST });
         gsap.to('.layer-core', { yPercent: 38, ease: 'none', scrollTrigger: heroST });
         gsap.to('.layer-orbs', { yPercent: 55, ease: 'none', scrollTrigger: heroST });
-        gsap.to('.hero-content', { yPercent: -18, opacity: 0.2, ease: 'none', scrollTrigger: heroST });
+        gsap.to('.layer-dust', { yPercent: 8, ease: 'none', scrollTrigger: heroST });
+        // Hero text layers drift at different rates
+        [['.hero-section h1', -8], ['.hero-role', -14], ['.hero-tagline', -22], ['.hero-cta', -30], ['.avail-pill', -4]].forEach(([sel, y]) =>
+            gsap.to(sel, { yPercent: y, ease: 'none', scrollTrigger: heroST }));
+        gsap.to('.hero-content', { opacity: 0.15, ease: 'none', scrollTrigger: { ...heroST, start: '30% top' } });
 
         // Pointer depth on the inner wrappers (scroll parallax is on the outer layers)
         const depth = [['.layer-ambient', 10], ['.layer-grid', 16], ['.layer-core', 34], ['.layer-orbs', 52]].map(([s, k]) => ({
@@ -191,6 +195,10 @@
                 yPercent: 8, ease: 'none',
                 scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
             });
+            const layer = { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true };
+            gsap.fromTo($('span', mock), { yPercent: -18 }, { yPercent: 18, ease: 'none', scrollTrigger: layer });
+            gsap.fromTo($('code', mock), { yPercent: 40 }, { yPercent: -40, ease: 'none', scrollTrigger: layer });
+            gsap.fromTo($('.project-body', card), { y: 30 }, { y: -30, ease: 'none', scrollTrigger: layer });
             const rx = gsap.quickTo(mock, 'rotationX', { duration: 0.5, ease: 'power3.out' });
             const ry = gsap.quickTo(mock, 'rotationY', { duration: 0.5, ease: 'power3.out' });
             const mv = (e) => {
@@ -207,6 +215,31 @@
         return () => {
             hero.removeEventListener('pointermove', pointer);
             tiltCleanups.forEach((fn) => fn());
+        };
+    });
+
+    /* Hero 3D: lazy, gated, torn down when the gate closes. Falls back to the static image. */
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+        if ((navigator.hardwareConcurrency || 0) < 4 || navigator.connection?.saveData) return;
+        const hero = $('#hero'), fallback = $('.core-fallback');
+        let dispose, canvas, cancelled = false;
+        const boot = async () => {
+            const { start } = await import('./scene3d.js');
+            if (cancelled) return;
+            canvas = document.createElement('canvas');
+            canvas.className = 'hero-3d';
+            canvas.setAttribute('aria-hidden', 'true');
+            fallback.after(canvas);
+            dispose = start(canvas, hero);
+            if (!dispose) { canvas.remove(); return; }
+            requestAnimationFrame(() => { canvas.classList.add('is-live'); fallback.classList.add('is-hidden'); });
+        };
+        const kick = () => ('requestIdleCallback' in window ? requestIdleCallback(boot, { timeout: 2500 }) : setTimeout(boot, 800));
+        if (document.readyState === 'complete') kick(); else addEventListener('load', kick, { once: true });
+        return () => {
+            cancelled = true;
+            dispose?.(); canvas?.remove();
+            fallback.classList.remove('is-hidden');
         };
     });
 })();
