@@ -4,12 +4,8 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Content-Security-Policy",
+          "key": "Content-Security-Policy-Report-Only",
           "value": "default-src 'none'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://api.fontshare.com https://unpkg.com; font-src https://fonts.gstatic.com https://cdn.fontshare.com https://unpkg.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains"
         },
         {
           "key": "X-Content-Type-Options",
@@ -26,6 +22,10 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
         }
       ]
     }
