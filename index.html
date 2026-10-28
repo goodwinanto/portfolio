@@ -4,544 +4,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodwin Anto | DevOps & AI Engineer</title>
-    <meta name="description"
-        content="Goodwin Anto — cloud infrastructure, DevOps automation, and LLM/RAG integration for teams that need things shipped.">
+    <!-- `js` class gates initial hidden states; script.js removes it again if GSAP fails to load -->
+    <script>document.documentElement.classList.add('js')</script>
 
-    <!-- Fonts: Geist & Clash Display -->
+    <title>Goodwin Anto | AI Engineer, Web Developer &amp; WordPress Developer</title>
+    <meta name="description"
+        content="Goodwin Anto is an AI engineer and web developer. AI workflow systems, client websites, WordPress development and AI-assisted code analysis and transformation.">
+    <link rel="canonical" href="https://goodwinanto.vercel.app/">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Goodwin Anto">
+    <meta property="og:title" content="Goodwin Anto | AI Engineer, Web Developer &amp; WordPress Developer">
+    <meta property="og:description"
+        content="AI workflow systems, client websites, WordPress development and AI-assisted code analysis. Taking on new projects.">
+    <meta property="og:url" content="https://goodwinanto.vercel.app/">
+    <meta property="og:image" content="https://goodwinanto.vercel.app/assets/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Goodwin Anto | AI Engineer &amp; Web Developer">
+    <meta name="twitter:description"
+        content="AI workflow systems, client websites, WordPress development and AI-assisted code analysis.">
+    <meta name="twitter:image" content="https://goodwinanto.vercel.app/assets/og.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+    <!-- Fonts: Geist (Google) + Clash Display (Fontshare), both font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://api.fontshare.com">
-    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap"
-        as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap"
-        as="style">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap"
         rel="stylesheet">
 
-    <!-- Phosphor Icons for elegant minimalist icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
     <link rel="stylesheet" href="styles.css">
 
-    <style>
-        /* ── SERVICES SECTION ─────────────────────────────── */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
-        }
+    <!-- Phosphor icons: exact version, deferred, SRI-pinned -->
+    <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"
+        integrity="sha384-cPFV+/abYd3INVFHPmSKpBmcnH+Q+bTZW7dv/EiuShUNPkHyFmRF8PsL7Ibfvunk"
+        crossorigin="anonymous"></script>
 
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            transition: all var(--transition-base);
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://goodwinanto.vercel.app/#person",
+          "name": "Goodwin Anto",
+          "jobTitle": "AI Engineer & Software Developer",
+          "url": "https://goodwinanto.vercel.app/",
+          "email": "mailto:goodwinantoofficial@gmail.com",
+          "sameAs": ["https://linkedin.com/in/goodwin-anto", "https://github.com/goodwinanto"],
+          "knowsAbout": ["AI workflow automation", "RAG", "WordPress", "Web development", "Terraform", "Azure", "AWS"]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://goodwinanto.vercel.app/#service",
+          "name": "Goodwin Anto – AI engineering and web development",
+          "url": "https://goodwinanto.vercel.app/",
+          "image": "https://goodwinanto.vercel.app/assets/og.png",
+          "founder": { "@id": "https://goodwinanto.vercel.app/#person" },
+          "description": "AI workflow systems, client websites, WordPress development and AI-assisted code analysis and transformation.",
+          "areaServed": "Worldwide",
+          "serviceType": ["AI workflow development", "Website development", "WordPress development", "Code analysis and modernisation", "Cloud and DevOps"]
         }
-
-        .service-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .service-icon {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            margin-bottom: 0.25rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 0;
-        }
-
-        .service-card p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .service-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-top: auto;
-            padding-top: 0.5rem;
-        }
-
-        .service-tags span {
-            font-size: 0.72rem;
-            padding: 0.2rem 0.55rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-        }
-
-        /* ── HIRE ME NAV BUTTON ───────────────────────────── */
-        .btn-hire {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.45rem 1.1rem;
-            border-radius: var(--radius-full);
-            font-size: 0.82rem;
-            font-weight: 500;
-            background: var(--text-primary);
-            color: var(--bg-main);
-            border: 1px solid transparent;
-            transition: all var(--transition-base);
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .btn-hire:hover {
-            background: #ffffff;
-            box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-hire .hire-dot {
-            width: 6px;
-            height: 6px;
-            background: #22c55e;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        /* ── AVAILABILITY PILL ────────────────────────────── */
-        .avail-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            background: rgba(34, 197, 94, 0.06);
-            font-size: 0.8rem;
-            color: #86efac;
-            margin-bottom: var(--spacing-md);
-        }
-
-        /* ── IMPACT BADGE ON PROJECTS ─────────────────────── */
-        .impact-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.72rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: var(--radius-sm);
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            color: #86efac;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ── SECTION LEAD TEXT ────────────────────────────── */
-        .section-lead {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 520px;
-            margin-top: -2rem;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-hire {
-                display: none;
-            }
-        }
-    </style>
+      ]
+    }
+    </script>
 </head>
 
 <body>
-    <!-- ✦ Custom Cursor Elements -->
-    <div class="custom-cursor"></div>
-    <div class="custom-cursor-follower"></div>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <!-- ✦ Ambient Grain and Glow -->
-    <div id="noise"></div>
-    <div id="ambient-bg"></div>
-    <div class="cursor-glow"></div>
+    <!-- Cursor, grain and glow (decorative) -->
+    <div class="custom-cursor" aria-hidden="true"></div>
+    <div class="custom-cursor-follower" aria-hidden="true"></div>
+    <div id="noise" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">Goodwin.</a>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <i class="ph ph-list"></i>
+    <header class="navbar">
+        <nav class="nav-content" aria-label="Main">
+            <a href="#hero" class="logo">Goodwin.</a>
+            <button class="mobile-menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false"
+                aria-controls="nav-links">
+                <i class="ph ph-list" aria-hidden="true"></i>
             </button>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
+                <a href="#projects">Work</a>
+                <a href="#process">Process</a>
                 <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="nav-cta-mobile">Start a project</a>
             </div>
-            <!-- ✦ Hire me CTA in nav -->
-            <a href="#contact" class="btn-hire">
-                <span class="hire-dot"></span> Hire me
-            </a>
-        </div>
-    </nav>
+            <a href="#contact" class="btn-hire"><span class="hire-dot" aria-hidden="true"></span> Start a project</a>
+        </nav>
+    </header>
 
-    <main>
-        <!-- HERO SECTION -->
+    <main id="main">
+        <!-- HERO -->
         <section id="hero" class="hero-section">
-            <div class="hero-bg">
-                <div class="hero-gradient"></div>
+            <div class="hero-bg" aria-hidden="true">
+                <div class="layer layer-ambient"><div class="depth"><img src="assets/ambient_bg.webp" width="640" height="640" alt="" decoding="async"></div></div>
+                <div class="layer layer-grid"><div class="depth"></div></div>
+                <div class="layer layer-core"><div class="depth"><img src="assets/hero_bg_core.webp" width="640" height="640" alt="" decoding="async"></div></div>
+                <div class="layer layer-orbs"><div class="depth"><span class="orb orb-a"></span><span class="orb orb-b"></span></div></div>
             </div>
-            <div class="container fade-in">
+            <div class="container">
                 <div class="hero-content">
-                    <!-- ✦ Availability signal — specific and freelance-oriented -->
-                    <div class="avail-pill fade-in" style="transition-delay: 0.1s">
-                        <span class="pulse-dot"></span> Available for freelance &amp; contracts — April 2026
-                    </div>
-                    <h1 class="fade-in" style="transition-delay: 0.2s">Goodwin Anto</h1>
-                    <!-- ✦ Value-first subtitle -->
-                    <h2 class="fade-in" style="transition-delay: 0.3s">DevOps &amp; AI Engineer.</h2>
-                    <!-- ✦ Hero tagline rewritten to speak to clients, not recruiters -->
-                    <p class="hero-tagline fade-in" style="transition-delay: 0.4s">
-                        Building intelligent systems that actually work.
-                    </p>
-                    <p class="fade-in"
-                        style="transition-delay: 0.45s; max-width: 560px; color: var(--text-secondary); font-size: 1rem;">
-                        3 years shipping DevOps automation and LLM-powered systems for enterprise clients.
-                    </p>
-                    <div class="hero-cta fade-in" style="transition-delay: 0.5s">
-                        <a href="#contact" class="btn btn-primary">Work with me</a>
+                    <div class="avail-pill hero-in"><span class="pulse-dot" aria-hidden="true"></span> Taking on new projects</div>
+                    <h1 class="hero-in">Goodwin <span class="dim">Anto</span></h1>
+                    <p class="hero-role hero-in">AI Engineer &amp; Software Developer</p>
+                    <p class="hero-tagline hero-in">I build websites, AI workflows and code tooling that run in production.</p>
+                    <div class="hero-cta hero-in">
+                        <a href="#contact" class="btn btn-primary">Start a project</a>
                         <a href="#projects" class="btn btn-secondary">See my work</a>
                     </div>
                 </div>
             </div>
-
-            <div class="scroll-indicator fade-in" style="transition-delay: 0.8s">
-                <i class="ph ph-arrow-down"></i>
-            </div>
+            <div class="scroll-indicator" aria-hidden="true"><i class="ph ph-arrow-down"></i></div>
         </section>
 
-        <!-- ABOUT SECTION -->
+        <!-- ABOUT -->
         <section id="about" class="section">
-            <div class="container fade-in">
+            <div class="container">
                 <div class="section-header">
-                    <h2>About</h2>
+                    <p class="eyebrow">01 / About</p>
+                    <h2 class="split">Four things I do, one standard: production-grade.</h2>
                 </div>
                 <div class="about-content grid-2">
                     <div class="about-text">
-                        <p>DevOps and AI engineer with 3 years at Accenture, delivering cloud infrastructure, automation pipelines, and enterprise AI systems for Fortune 500 clients across financial services and luxury retail.</p>
-                        <p>I specialise in the full automation stack — from Azure/AWS cloud infrastructure and Terraform IaC to CI/CD pipelines, agentic AI systems, and production RAG integrations. I don't just build automations, I architect them: connecting GenAI and LLM pipelines to real workflows, building browser agents, API integrations, and multi-step agentic systems that actually run in production.</p>
-                        <p>Open to freelance contracts and consulting. I work best with teams that need things shipped, not over-architected.</p>
+                        <p class="reveal"><strong>AI workflow systems.</strong> Agentic automation, RAG and LLM pipelines wired into the tools your team already uses.</p>
+                        <p class="reveal"><strong>Websites for clients.</strong> Custom front-end builds and WordPress, fast, accessible and ready for search.</p>
+                        <p class="reveal"><strong>AI-assisted code analysis and transformation.</strong> Legacy code review, migration and refactoring, test generation and documentation, with human review on every change.</p>
+                        <p class="reveal"><strong>Cloud and DevOps foundation.</strong> Enterprise delivery work in Azure, AWS, Terraform and CI/CD is what makes the rest production-grade.</p>
+                        <p class="reveal">I work best with teams that need things shipped, not over-architected.</p>
                     </div>
-
-                    <!-- SKILLS SECTION (Nested in About visually) -->
-                    <div class="skills-wrapper">
+                    <div class="skills-wrapper reveal">
                         <h3>Core Technologies</h3>
-                        <div class="skills-grid">
-                            <span class="skill-tag"><i class="ph ph-code"></i> Python</span>
-                            <span class="skill-tag"><i class="ph ph-cloud"></i> Azure</span>
-                            <span class="skill-tag"><i class="ph ph-cloud"></i> AWS</span>
-                            <span class="skill-tag"><i class="ph ph-docker-logo"></i> Docker</span>
-                            <span class="skill-tag"><i class="ph ph-hexagon"></i> AKS</span>
-                            <span class="skill-tag"><i class="ph ph-file-code"></i> Terraform</span>
-                            <span class="skill-tag"><i class="ph ph-arrows-merge"></i> CI/CD</span>
-                            <span class="skill-tag"><i class="ph ph-brain"></i> LLM/RAG</span>
-                            <span class="skill-tag"><i class="ph ph-link"></i> LangChain</span>
-                            <span class="skill-tag"><i class="ph ph-terminal"></i> PowerShell</span>
-                            <span class="skill-tag"><i class="ph ph-git-merge"></i> Azure DevOps</span>
-                            <span class="skill-tag"><i class="ph ph-lightning"></i> Rundeck</span>
-                        </div>
+                        <ul class="skills-grid" role="list">
+                            <li class="skill-tag"><i class="ph ph-code" aria-hidden="true"></i> Python</li>
+                            <li class="skill-tag"><i class="ph ph-cloud" aria-hidden="true"></i> Azure</li>
+                            <li class="skill-tag"><i class="ph ph-cloud" aria-hidden="true"></i> AWS</li>
+                            <li class="skill-tag"><i class="ph ph-docker-logo" aria-hidden="true"></i> Docker</li>
+                            <li class="skill-tag"><i class="ph ph-hexagon" aria-hidden="true"></i> AKS</li>
+                            <li class="skill-tag"><i class="ph ph-file-code" aria-hidden="true"></i> Terraform</li>
+                            <li class="skill-tag"><i class="ph ph-arrows-merge" aria-hidden="true"></i> CI/CD</li>
+                            <li class="skill-tag"><i class="ph ph-brain" aria-hidden="true"></i> LLM/RAG</li>
+                            <li class="skill-tag"><i class="ph ph-link" aria-hidden="true"></i> LangChain</li>
+                            <li class="skill-tag"><i class="ph ph-wordpress-logo" aria-hidden="true"></i> WordPress</li>
+                            <li class="skill-tag"><i class="ph ph-terminal" aria-hidden="true"></i> PowerShell</li>
+                            <li class="skill-tag"><i class="ph ph-git-merge" aria-hidden="true"></i> Azure DevOps</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ✦ SERVICES SECTION — new, freelance-critical -->
+        <!-- TECH MARQUEE (decorative; the list above is the accessible version) -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Python</span><span>LangChain</span><span>LangGraph</span><span>RAG</span><span>n8n</span><span>WordPress</span><span>WooCommerce</span><span>Playwright</span><span>Azure</span><span>AWS</span><span>Terraform</span><span>Docker</span><span>AKS</span><span>CI/CD</span>
+                <span>Python</span><span>LangChain</span><span>LangGraph</span><span>RAG</span><span>n8n</span><span>WordPress</span><span>WooCommerce</span><span>Playwright</span><span>Azure</span><span>AWS</span><span>Terraform</span><span>Docker</span><span>AKS</span><span>CI/CD</span>
+            </div>
+        </div>
+
+        <!-- SERVICES -->
         <section id="services" class="section alternate-bg">
-            <div class="container fade-in">
-                <div class="section-header">
-                    <h2>What I can do for you</h2>
+            <div class="container services-layout">
+                <div class="services-intro">
+                    <p class="eyebrow">02 / Services</p>
+                    <h2 class="split">What I can build for you</h2>
+                    <p class="section-lead">Focused services for teams that need websites, automation or AI work done properly.</p>
+                    <p class="price-note">Project-based and hourly engagements available. <a href="#contact">Let's scope it out →</a></p>
                 </div>
-                <p class="section-lead">Focused services for teams that need cloud, automation, or AI work done
-                    properly.</p>
-                <div class="services-grid">
-
-                    <div class="service-card fade-in">
-                        <div class="service-icon"><i class="ph ph-cloud"></i></div>
-                        <h3>Cloud Infrastructure (Azure &amp; AWS)</h3>
-                        <p>End-to-end Azure infrastructure provisioning, AKS cluster management, cost optimisation, and
-                            policy enforcement for production workloads.</p>
-                        <div class="service-tags">
-                            <span>Azure</span><span>AWS</span><span>AKS</span><span>Terraform</span><span>IaC</span><span>Kubernetes</span>
-                        </div>
-                    </div>
-
-                    <div class="service-card fade-in" style="transition-delay: 0.1s">
-                        <div class="service-icon"><i class="ph ph-arrows-merge"></i></div>
-                        <h3>DevOps &amp; CI/CD Automation</h3>
-                        <p>Pipeline design, Rundeck workflow automation, infrastructure-as-code, and release engineering
-                            that cuts deploy time and manual overhead.</p>
-                        <div class="service-tags">
-                            <span>Azure
-                                DevOps</span><span>CI/CD</span><span>Rundeck</span><span>Docker</span><span>PowerShell</span>
-                        </div>
-                    </div>
-
-                    <div class="service-card fade-in" style="transition-delay: 0.2s">
-                        <div class="service-icon"><i class="ph ph-brain"></i></div>
-                        <h3>LLM &amp; RAG Integration</h3>
-                        <p>Production-ready AI pipelines — chatbots, document Q&amp;A systems, and ITSM automation —
-                            built with LangChain, ChromaDB, and open-source LLMs.</p>
-                        <div class="service-tags">
-                            <span>LangChain</span><span>RAG</span><span>LLaMA
-                                3</span><span>Groq</span><span>ChromaDB</span>
-                        </div>
-                    </div>
-
-                    <div class="service-card fade-in" style="transition-delay: 0.3s">
-                        <div class="service-icon"><i class="ph ph-puzzle-piece"></i></div>
+                <ul class="services-grid" role="list">
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-flow-arrow"></i></div>
+                        <h3>AI Workflow &amp; Agent Systems</h3>
+                        <p>Agents and automations that do real work: retrieval over your documents, multi-step workflows, and bots inside Teams or Slack.</p>
+                        <ul class="service-tags" role="list"><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>n8n-style automations</li><li>Teams / Slack bots</li></ul>
+                    </li>
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-browsers"></i></div>
+                        <h3>Websites for Clients</h3>
+                        <p>Custom-built sites that load fast, work for everyone and are ready to be found.</p>
+                        <ul class="service-tags" role="list"><li>Custom builds</li><li>Fast</li><li>Accessible</li><li>SEO-ready</li></ul>
+                    </li>
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-wordpress-logo"></i></div>
+                        <h3>WordPress Development</h3>
+                        <p>Custom themes and plugins, shops, page-builder work, plus speed and security hardening, migrations and maintenance.</p>
+                        <ul class="service-tags" role="list"><li>Themes &amp; plugins</li><li>WooCommerce</li><li>Elementor / Gutenberg</li><li>Migrations</li><li>Hardening</li></ul>
+                    </li>
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-code"></i></div>
+                        <h3>AI Code Analysis &amp; Transformation</h3>
+                        <p>Codebase audits, legacy modernisation, automated refactors and migrations, and test and docs generation, using LLM pipelines with human review.</p>
+                        <ul class="service-tags" role="list"><li>Audits</li><li>Refactors</li><li>Migrations</li><li>Test generation</li><li>Docs</li></ul>
+                    </li>
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-cloud"></i></div>
+                        <h3>Cloud &amp; DevOps</h3>
+                        <p>Infrastructure as code, Kubernetes and delivery pipelines for production workloads.</p>
+                        <ul class="service-tags" role="list"><li>Azure</li><li>AWS</li><li>Terraform</li><li>AKS</li><li>CI/CD</li></ul>
+                    </li>
+                    <li class="service-card">
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-puzzle-piece"></i></div>
                         <h3>Custom Automation &amp; Integrations</h3>
-                        <p>If it's repetitive, it can be automated. I design and build custom workflows, API
-                            integrations, browser automation, and tooling that slots into whatever stack you already
-                            have.</p>
-                        <div class="service-tags">
-                            <span>Python</span><span>Playwright</span><span>REST
-                                APIs</span><span>Webhooks</span><span>Scripting</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ✦ Soft pricing signal -->
-                <p style="margin-top: 2rem; font-size: 0.88rem; color: var(--text-muted); text-align: center;">
-                    Project-based and hourly engagements available. <a href="#contact"
-                        style="color: var(--text-secondary); text-decoration: underline; text-underline-offset: 3px;">Let's
-                        scope it out →</a>
-                </p>
+                        <p>If it's repetitive, it can be automated. APIs, webhooks and browser agents that slot into your existing stack.</p>
+                        <ul class="service-tags" role="list"><li>APIs</li><li>Webhooks</li><li>Playwright browser agents</li><li>Python</li></ul>
+                    </li>
+                </ul>
             </div>
         </section>
 
-        <!-- PROJECTS SECTION -->
+        <!-- PROJECTS -->
         <section id="projects" class="section">
-            <div class="container fade-in">
+            <div class="container">
                 <div class="section-header">
-                    <h2>Selected Projects</h2>
+                    <p class="eyebrow">03 / Work</p>
+                    <h2 class="split">Selected projects</h2>
                 </div>
 
-                <div class="projects-grid">
-                    <!-- Project 1 — DocuMind RAG -->
-                    <div class="project-card fade-in">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="ph ph-file-text"></i></div>
+                <ul class="projects-grid" role="list">
+                    <li class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-a"><div class="mock-inner"><span>01</span><code>query → cited answer</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">Open source</p>
+                            <h3>DocuMind RAG</h3>
+                            <!-- TODO(Goodwin): add real metric, e.g. "answers in X seconds over Y-page PDFs" -->
+                            <p>Turns any PDF into a queryable knowledge base with source-cited answers. Eliminates manual document search: query instead of scroll. Built with LangChain, ChromaDB, Groq, and Streamlit.</p>
+                            <ul class="project-tech" role="list"><li>LangChain</li><li>ChromaDB</li><li>Groq</li><li>Streamlit</li></ul>
                             <div class="project-links">
-                                <a href="https://github.com/goodwinanto" target="_blank" rel="noopener"
-                                    aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
+                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="DocuMind RAG on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
                             </div>
                         </div>
-                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source
-                        </div>
-                        <h3>DocuMind RAG</h3>
-                        <!-- ✦ Outcome-framed description -->
-                        <p>Turns any PDF into a queryable knowledge base with source-cited answers. Eliminates manual
-                            document search — query instead of scroll. Built with LangChain, ChromaDB, Groq, and
-                            Streamlit.</p>
-                        <div class="project-tech">
-                            <span>LangChain</span>
-                            <span>ChromaDB</span>
-                            <span>Groq</span>
-                            <span>Streamlit</span>
-                        </div>
-                    </div>
+                    </li>
 
-                    <!-- Project 2 — AirMigrate -->
-                    <div class="project-card fade-in" style="transition-delay: 0.1s">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="ph ph-paper-plane-tilt"></i></div>
+                    <li class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-b"><div class="mock-inner"><span>02</span><code>sha256 ✓ verified</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">Open source</p>
+                            <h3>AirMigrate</h3>
+                            <p>Migrates iPhone media to Linux with zero data loss: SHA-256 verification, intelligent auto-organisation, and Apple Live Photo detection. Solves a pain every Linux user with an iPhone knows.</p>
+                            <ul class="project-tech" role="list"><li>Python</li><li>customtkinter</li><li>OS Integrations</li></ul>
                             <div class="project-links">
-                                <a href="https://github.com/goodwinanto" target="_blank" rel="noopener"
-                                    aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
+                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="AirMigrate on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
                             </div>
                         </div>
-                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source
-                        </div>
-                        <h3>AirMigrate</h3>
-                        <!-- ✦ Outcome-framed -->
-                        <p>Migrates iPhone media to Linux with zero data loss — SHA-256 verification, intelligent
-                            auto-organisation, and Apple Live Photo detection. Solves a pain every Linux user with an
-                            iPhone knows.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>customtkinter</span>
-                            <span>OS Integrations</span>
-                        </div>
-                    </div>
+                    </li>
 
-                    <!-- Project 3 — IT Support Chatbot (enterprise framing) -->
-                    <div class="project-card fade-in" style="transition-delay: 0.2s">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="ph ph-chat-teardrop-dots"></i></div>
-                            <div class="project-links"></div>
-                        </div>
-                        <!-- ✦ Enterprise credibility badge -->
-                        <div class="impact-badge"><i class="ph ph-buildings" style="font-size:0.75rem"></i> Fortune 500
-                            deployment</div>
-                        <h3>Enterprise IT Support Chatbot</h3>
-                        <!-- ✦ Problem → outcome framing -->
-                        <p>Reduced L1 support overhead for a Fortune 500 financial client by automating ticket triage,
-                            resolution, and ITSM workflows via a RAG-powered Microsoft Teams bot. Complex conversational
-                            flows with adaptive card UI.</p>
-                        <div class="project-tech">
-                            <span>RAG</span>
-                            <span>MS Teams</span>
-                            <span>Adaptive Cards</span>
-                            <span>ITSM Integration</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 — Job Application Automator -->
-                    <div class="project-card fade-in" style="transition-delay: 0.3s">
-                        <div class="project-header">
-                            <div class="project-icon"><i class="ph ph-robot"></i></div>
+                    <li class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-c"><div class="mock-inner"><span>03</span><code>ticket → resolved</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">Enterprise deployment</p>
+                            <h3>Enterprise IT Support Chatbot</h3>
+                            <!-- TODO(Goodwin): add real metric, e.g. "X% fewer L1 tickets" -->
+                            <p>Reduced L1 support overhead for a Fortune 500 financial client by automating ticket triage, resolution, and ITSM workflows via a RAG-powered Microsoft Teams bot. Complex conversational flows with adaptive card UI.</p>
+                            <ul class="project-tech" role="list"><li>RAG</li><li>MS Teams</li><li>Adaptive Cards</li><li>ITSM Integration</li></ul>
                             <div class="project-links">
-                                <a href="https://github.com/goodwinanto" target="_blank" rel="noopener"
-                                    aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
+                                <!-- TODO(Goodwin): write an NDA-safe case study summary and link it here -->
+                                <a href="#contact" aria-label="Enterprise IT Support Chatbot case study (NDA-safe summary)"><i class="ph ph-file-text" aria-hidden="true"></i> Case study (NDA-safe summary)</a>
                             </div>
                         </div>
-                        <div class="impact-badge"><i class="ph ph-sparkle" style="font-size:0.75rem"></i> Open source
+                    </li>
+
+                    <li class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-d"><div class="mock-inner"><span>04</span><code>form → filled</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">Open source</p>
+                            <h3>Job Application Automator</h3>
+                            <!-- TODO(Goodwin): add real metric, e.g. "X forms filled per hour" -->
+                            <p>Cuts job application time from minutes to seconds. An AI browser agent that intelligently parses and fills application forms at scale, built with Playwright and LLaMA 3 via Groq.</p>
+                            <ul class="project-tech" role="list"><li>Playwright</li><li>LLaMA 3</li><li>Groq</li><li>Browser Automation</li></ul>
+                            <div class="project-links">
+                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
+                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="Job Application Automator on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
+                            </div>
                         </div>
-                        <h3>Job Application Automator</h3>
-                        <!-- ✦ More concrete framing -->
-                        <p>Cuts job application time from minutes to seconds. An AI browser agent that intelligently
-                            parses and fills application forms at scale — built with Playwright and LLaMA 3 via Groq.
-                        </p>
-                        <div class="project-tech">
-                            <span>Playwright</span>
-                            <span>LLaMA 3</span>
-                            <span>Groq</span>
-                            <span>Browser Automation</span>
+                    </li>
+
+                    <!-- TODO(Goodwin): replace this placeholder with a real client website (name only if the client agrees) -->
+                    <li class="project-card is-placeholder">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-e"><div class="mock-inner"><span>05</span><code>coming soon</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">Client website</p>
+                            <h3>Client website</h3>
+                            <p>Case study in progress.</p>
                         </div>
-                    </div>
-                </div>
+                    </li>
+
+                    <!-- TODO(Goodwin): replace this placeholder with a real WordPress project -->
+                    <li class="project-card is-placeholder">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-f"><div class="mock-inner"><span>06</span><code>coming soon</code></div></div></div>
+                        <div class="project-body">
+                            <p class="impact-badge">WordPress</p>
+                            <h3>WordPress project</h3>
+                            <p>Case study in progress.</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
 
-        <!-- EXPERIENCE & EDUCATION SECTION -->
-        <section id="experience" class="section alternate-bg">
-            <div class="container fade-in">
-                <div class="grid-2">
+        <!-- HOW I WORK -->
+        <section id="process" class="section alternate-bg">
+            <div class="container">
+                <div class="section-header">
+                    <p class="eyebrow">04 / Process</p>
+                    <h2 class="split">How I work</h2>
+                </div>
+                <ol class="steps" role="list">
+                    <li class="step reveal"><span class="step-n">01</span><h3>Scope</h3><p>We agree the goal, the deliverables and a fixed first milestone.</p></li>
+                    <li class="step reveal"><span class="step-n">02</span><h3>Build</h3><p>Short iterations with working previews you can click through.</p></li>
+                    <li class="step reveal"><span class="step-n">03</span><h3>Ship</h3><p>Tested, deployed and documented, not left on a staging server.</p></li>
+                    <li class="step reveal"><span class="step-n">04</span><h3>Handover</h3><p>Clear docs and a walkthrough so your team can own what I built.</p></li>
+                </ol>
+            </div>
+        </section>
 
-                    <!-- Experience -->
+        <!-- EXPERIENCE & EDUCATION -->
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="grid-2 top">
                     <div>
                         <div class="section-header">
-                            <h2>Experience</h2>
+                            <p class="eyebrow">05 / Experience</p>
+                            <h2 class="split">Experience</h2>
                         </div>
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2024 &mdash; 2026</div>
-                                    <h3 class="timeline-title">Automation Developer</h3>
-                                    <h4 class="timeline-company">Accenture</h4>
-                                    <!-- ✦ Brief impact line -->
-                                    <p
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; margin-bottom: 0;">
-                                        Built RAG chatbots and DevOps automation for Fortune 500 financial &amp; luxury
-                                        retail clients on Azure/AKS.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2023 &mdash; 2024</div>
-                                    <h3 class="timeline-title">Cloud Engineer</h3>
-                                    <h4 class="timeline-company">Accenture</h4>
-                                    <p
-                                        style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; margin-bottom: 0;">
-                                        Azure infrastructure provisioning, IaC with Terraform, incident response and
-                                        cloud policy enforcement.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <ol class="timeline" role="list">
+                            <li class="timeline-item reveal">
+                                <!-- TODO(Goodwin): confirm start date -->
+                                <div class="timeline-date">2026 &mdash; Present</div>
+                                <h3 class="timeline-title">AI Engineer</h3>
+                                <p class="timeline-company">Leading Global IT Services Company</p>
+                                <!-- TODO(Goodwin): add 1-2 NDA-safe bullets for this role -->
+                                <p class="timeline-note">Building AI workflow and agentic automation systems for enterprise delivery.</p>
+                            </li>
+                            <li class="timeline-item reveal">
+                                <div class="timeline-date">2024 &mdash; 2026</div>
+                                <h3 class="timeline-title">Automation Developer</h3>
+                                <p class="timeline-company">Global Professional Services Firm</p>
+                                <p class="timeline-note">Built RAG chatbots and DevOps automation for Fortune 500 financial &amp; luxury retail clients on Azure/AKS.</p>
+                            </li>
+                            <li class="timeline-item reveal">
+                                <div class="timeline-date">2023 &mdash; 2024</div>
+                                <h3 class="timeline-title">Cloud Engineer</h3>
+                                <p class="timeline-company">Global Professional Services Firm</p>
+                                <p class="timeline-note">Azure infrastructure provisioning, IaC with Terraform and cloud policy enforcement.</p>
+                            </li>
+                        </ol>
                     </div>
 
-                    <!-- Education & Certs -->
                     <div>
                         <div class="section-header">
-                            <h2>Education &amp; Certifications</h2>
+                            <p class="eyebrow">Education</p>
+                            <h2 class="split">Education &amp; Certifications</h2>
                         </div>
-
-                        <!-- Education Card -->
-                        <div class="edu-card">
-                            <div class="edu-icon"><i class="ph ph-graduation-cap"></i></div>
-                            <div>
-                                <h3>BCA (Bachelor of Computer Applications)</h3>
-                                <p>Christ College Irinjalakuda &bull; 2020 &mdash; 2023</p>
-                            </div>
+                        <div class="edu-card reveal">
+                            <h3>BCA (Bachelor of Computer Applications)</h3>
+                            <p>Christ College Irinjalakuda &bull; 2020 &mdash; 2023</p>
                         </div>
-
-                        <!-- Certifications -->
                         <h3 class="certs-title">Certifications</h3>
-                        <div class="certs-grid">
-                            <div class="cert-badge">
-                                <i class="ph ph-seal-check"></i>
-                                AZ-900 — Microsoft Azure Fundamentals
-                            </div>
-                            <div class="cert-badge">
-                                <i class="ph ph-seal-check"></i>
-                                Terraform Associate — HashiCorp
-                            </div>
-                        </div>
+                        <ul class="certs-grid" role="list">
+                            <li class="cert-badge reveal"><i class="ph ph-seal-check" aria-hidden="true"></i> AZ-900 — Microsoft Azure Fundamentals</li>
+                            <li class="cert-badge reveal"><i class="ph ph-seal-check" aria-hidden="true"></i> Terraform Associate — HashiCorp</li>
+                        </ul>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION — rewritten for clients, not recruiters -->
+        <!-- FAQ -->
+        <section id="faq" class="section alternate-bg">
+            <div class="container faq-wrap">
+                <div class="section-header">
+                    <p class="eyebrow">06 / FAQ</p>
+                    <h2 class="split">Common questions</h2>
+                </div>
+                <div class="faq">
+                    <details class="reveal"><summary>How can we work together?</summary>
+                        <p>Fixed-scope projects or hourly work, whichever suits the job. Short consulting engagements are fine too. We agree scope and a first milestone before I start.</p></details>
+                    <details class="reveal"><summary>WordPress or a custom build?</summary>
+                        <p>WordPress suits content-led sites where your team edits pages themselves. A custom build suits sites with unusual interactions or tight performance needs. I'll recommend whichever fits, not whichever is easier for me.</p></details>
+                    <details class="reveal"><summary>How do you use AI on code work?</summary>
+                        <p>LLM pipelines handle the repetitive parts: analysis, draft refactors, tests and docs. Every change is reviewed by me and checked against your tests before it reaches your codebase.</p></details>
+                    <details class="reveal"><summary>How long does a project take?</summary>
+                        <p>It depends on scope. A small site or automation can take a couple of weeks; larger builds or migrations take longer. You get a realistic estimate after the scoping call.</p></details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
         <section id="contact" class="section">
-            <div class="container fade-in">
+            <div class="container">
                 <div class="contact-box">
-                    <div class="avail-pill" style="margin: 0 auto 1.5rem;">
-                        <span class="pulse-dot"></span> Open for work — April 2026
-                    </div>
-                    <h2>Let's build something.</h2>
-                    <!-- ✦ Client-facing copy -->
-                    <p>Have a cloud migration, automation backlog, or AI integration in mind? I take on freelance
-                        contracts and short-to-medium term consulting engagements. Let's scope it out.</p>
+                    <div class="avail-pill"><span class="pulse-dot" aria-hidden="true"></span> Taking on new projects</div>
+                    <h2 class="split">Let's build something.</h2>
+                    <p class="reveal">Have a website, an AI workflow or a legacy codebase in mind? Tell me about it and I'll reply with next steps.</p>
+
+                    <form class="contact-form reveal" id="contact-form" novalidate>
+                        <!-- TODO(Goodwin): paste your free Web3Forms access key (https://web3forms.com) below -->
+                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="New enquiry from portfolio">
+                        <!-- Honeypot: hidden from people, bots fill it in -->
+                        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                        <label>Name<input type="text" name="name" required autocomplete="name"></label>
+                        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+                        <label class="full">Project details<textarea name="message" rows="4" required></textarea></label>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    </form>
 
                     <div class="contact-links">
-                        <a href="mailto:goodwinantoofficial@gmail.com" class="btn btn-primary btn-lg">
-                            <i class="ph ph-envelope-simple"></i> Get in touch
-                        </a>
-                        <a href="https://linkedin.com/in/goodwin-anto" target="_blank" rel="noopener"
-                            class="btn btn-secondary btn-lg">
-                            <i class="ph ph-linkedin-logo"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/goodwinanto" target="_blank" rel="noopener"
-                            class="btn btn-secondary btn-lg">
-                            <i class="ph ph-github-logo"></i> GitHub
-                        </a>
+                        <a href="mailto:goodwinantoofficial@gmail.com" class="btn btn-secondary"><i class="ph ph-envelope-simple" aria-hidden="true"></i> Email me</a>
+                        <a href="https://linkedin.com/in/goodwin-anto" target="_blank" rel="noopener" class="btn btn-secondary"><i class="ph ph-linkedin-logo" aria-hidden="true"></i> LinkedIn</a>
+                        <a href="https://github.com/goodwinanto" target="_blank" rel="noopener" class="btn btn-secondary"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
                     </div>
-                    <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
-                        Typical response time: within 24 hours.
-                    </p>
+                    <p class="response-note">Typical response time: within 24 hours.</p>
                 </div>
             </div>
         </section>
@@ -549,20 +439,17 @@
 
     <footer class="footer">
         <div class="container footer-container">
-            <div class="footer-brand">
-                <p>Goodwin Anto &copy; 2026. All rights reserved.</p>
-            </div>
-            <div class="footer-links">
-                <a href="#hero" class="hover-target">Back to Top <i class="ph ph-arrow-up"></i></a>
-            </div>
+            <p>Goodwin Anto &copy; 2026. All rights reserved.</p>
+            <a href="#hero">Back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
         </div>
     </footer>
 
-    <!-- ✦ Core Libraries for Premium Feel -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"
+        integrity="sha384-Q0QJmTaiVLQTTXxcTzx8VTet6f+0c0Zj+VwG6WTkv6Xd4YxCWhAsB4iy8gAAvzEX" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 
