@@ -23,7 +23,7 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
     window.matchMedia('(min-width: 769px)').addEventListener('change', () => setMenu(false));
 
-    /* ---------- Contact form (Web3Forms; key is a TODO placeholder in the HTML) ---------- */
+    /* ---------- Contact form (Web3Forms; access key is in the HTML) ---------- */
     const form = $('#contact-form');
     const status = $('#form-status');
     form.addEventListener('submit', async (e) => {
