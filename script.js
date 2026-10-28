@@ -224,7 +224,8 @@
         const hero = $('#hero'), fallback = $('.core-fallback');
         let dispose, canvas, cancelled = false;
         const boot = async () => {
-            const { start } = await import('./scene3d.js');
+            const { start } = await import('./scene3d.js').catch(() => ({}));
+            if (!start) return;
             if (cancelled) return;
             canvas = document.createElement('canvas');
             canvas.className = 'hero-3d';

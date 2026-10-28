@@ -241,13 +241,8 @@
                         <div class="project-body">
                             <p class="impact-badge">Open source</p>
                             <h3>DocuMind RAG</h3>
-                            <!-- TODO(Goodwin): add real metric, e.g. "answers in X seconds over Y-page PDFs" -->
                             <p>Turns any PDF into a queryable knowledge base with source-cited answers. Eliminates manual document search: query instead of scroll. Built with LangChain, ChromaDB, Groq, and Streamlit.</p>
                             <ul class="project-tech" role="list"><li>LangChain</li><li>ChromaDB</li><li>Groq</li><li>Streamlit</li></ul>
-                            <div class="project-links">
-                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
-                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="DocuMind RAG on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
-                            </div>
                         </div>
                     </li>
 
@@ -258,10 +253,6 @@
                             <h3>AirMigrate</h3>
                             <p>Migrates iPhone media to Linux with zero data loss: SHA-256 verification, intelligent auto-organisation, and Apple Live Photo detection. Solves a pain every Linux user with an iPhone knows.</p>
                             <ul class="project-tech" role="list"><li>Python</li><li>customtkinter</li><li>OS Integrations</li></ul>
-                            <div class="project-links">
-                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
-                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="AirMigrate on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
-                            </div>
                         </div>
                     </li>
 
@@ -270,11 +261,9 @@
                         <div class="project-body">
                             <p class="impact-badge">Enterprise deployment</p>
                             <h3>Enterprise IT Support Chatbot</h3>
-                            <!-- TODO(Goodwin): add real metric, e.g. "X% fewer L1 tickets" -->
                             <p>Reduced L1 support overhead for a Fortune 500 financial client by automating ticket triage, resolution, and ITSM workflows via a RAG-powered Microsoft Teams bot. Complex conversational flows with adaptive card UI.</p>
                             <ul class="project-tech" role="list"><li>RAG</li><li>MS Teams</li><li>Adaptive Cards</li><li>ITSM Integration</li></ul>
                             <div class="project-links">
-                                <!-- TODO(Goodwin): write an NDA-safe case study summary and link it here -->
                                 <a href="#contact" aria-label="Enterprise IT Support Chatbot case study (NDA-safe summary)"><i class="ph ph-file-text" aria-hidden="true"></i> Case study (NDA-safe summary)</a>
                             </div>
                         </div>
@@ -285,17 +274,11 @@
                         <div class="project-body">
                             <p class="impact-badge">Open source</p>
                             <h3>Job Application Automator</h3>
-                            <!-- TODO(Goodwin): add real metric, e.g. "X forms filled per hour" -->
                             <p>Cuts job application time from minutes to seconds. An AI browser agent that intelligently parses and fills application forms at scale, built with Playwright and LLaMA 3 via Groq.</p>
                             <ul class="project-tech" role="list"><li>Playwright</li><li>LLaMA 3</li><li>Groq</li><li>Browser Automation</li></ul>
-                            <div class="project-links">
-                                <!-- TODO(Goodwin): replace REPO_NAME with the real repository -->
-                                <a href="https://github.com/goodwinanto/REPO_NAME" target="_blank" rel="noopener" aria-label="Job Application Automator on GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
-                            </div>
                         </div>
                     </li>
 
-                    <!-- TODO(Goodwin): replace this placeholder with a real client website (name only if the client agrees) -->
                     <li class="project-card is-placeholder">
                         <div class="project-media" aria-hidden="true"><div class="mock mock-e"><div class="mock-inner"><span>05</span><code>coming soon</code></div></div></div>
                         <div class="project-body">
@@ -305,7 +288,6 @@
                         </div>
                     </li>
 
-                    <!-- TODO(Goodwin): replace this placeholder with a real WordPress project -->
                     <li class="project-card is-placeholder">
                         <div class="project-media" aria-hidden="true"><div class="mock mock-f"><div class="mock-inner"><span>06</span><code>coming soon</code></div></div></div>
                         <div class="project-body">
@@ -345,11 +327,9 @@
                         </div>
                         <ol class="timeline" role="list">
                             <li class="timeline-item reveal">
-                                <!-- TODO(Goodwin): confirm start date -->
                                 <div class="timeline-date">2026 &mdash; Present</div>
                                 <h3 class="timeline-title">AI Engineer</h3>
                                 <p class="timeline-company">Leading Global IT Services Company</p>
-                                <!-- TODO(Goodwin): add 1-2 NDA-safe bullets for this role -->
                                 <p class="timeline-note">Building AI workflow and agentic automation systems for enterprise delivery.</p>
                             </li>
                             <li class="timeline-item reveal">
@@ -420,17 +400,18 @@
                         <input type="hidden" name="from_name" value="Portfolio contact form">
                         <!-- Honeypot: hidden from people, bots fill it in -->
                         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                        <label>Name<input type="text" name="name" required autocomplete="name"></label>
-                        <label>Email<input type="email" name="email" required autocomplete="email"></label>
-                        <label class="full">Project details<textarea name="message" rows="4" required></textarea></label>
+                        <label>Name<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
+                        <label>Email<input type="email" name="email" required maxlength="254" autocomplete="email"></label>
+                        <label class="full">Project details<textarea name="message" rows="4" required maxlength="5000"></textarea></label>
                         <button type="submit" class="btn btn-primary">Send message</button>
                         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
                     </form>
+                    <noscript><p class="response-note">Contact form needs JavaScript. Please email goodwinantoofficial@gmail.com.</p></noscript>
 
                     <div class="contact-links">
                         <a href="mailto:goodwinantoofficial@gmail.com" class="btn btn-secondary"><i class="ph ph-envelope-simple" aria-hidden="true"></i> Email me</a>
-                        <a href="https://linkedin.com/in/goodwin-anto" target="_blank" rel="noopener" class="btn btn-secondary"><i class="ph ph-linkedin-logo" aria-hidden="true"></i> LinkedIn</a>
-                        <a href="https://github.com/goodwinanto" target="_blank" rel="noopener" class="btn btn-secondary"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
+                        <a href="https://linkedin.com/in/goodwin-anto" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><i class="ph ph-linkedin-logo" aria-hidden="true"></i> LinkedIn</a>
+                        <a href="https://github.com/goodwinanto" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><i class="ph ph-github-logo" aria-hidden="true"></i> GitHub</a>
                     </div>
                     <p class="response-note">Typical response time: within 24 hours.</p>
                 </div>
