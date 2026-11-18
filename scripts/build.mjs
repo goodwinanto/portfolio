@@ -13,7 +13,8 @@ const DEV = process.argv.includes('--dev');
 const DEV_PORT = 5173;
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist');
-const BANNER = '/*! © 2026 Goodwin Anto. All rights reserved. Unauthorised copying or reuse is prohibited. */';
+const BANNER =
+    '/*! © 2026 Goodwin Anto. All rights reserved. Unauthorised copying or reuse is prohibited. Bundled third-party code keeps its own licence. */';
 const HTML_PAGES = ['index.html', '404.html'];
 const ICON_DIR = 'node_modules/@phosphor-icons/core/assets/regular';
 
