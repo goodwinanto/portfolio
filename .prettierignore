@@ -1,9 +1,0 @@
-dist/
-_refs/
-node_modules/
-package-lock.json
-test-results/
-playwright-report/
-public/
-*.html
-.*.mjs
