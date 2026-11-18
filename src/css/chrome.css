@@ -1,0 +1,279 @@
+/* Site chrome: cursor, grain, preloader, navigation, footer */
+
+/* ---- Custom cursor (mice only; cursor.js adds .has-cursor) ---- */
+.custom-cursor,
+.custom-cursor-follower,
+.cursor-glow {
+    display: none;
+}
+.has-cursor,
+.has-cursor a,
+.has-cursor button,
+.has-cursor summary,
+.has-cursor label {
+    cursor: none;
+}
+.has-cursor .custom-cursor,
+.has-cursor .custom-cursor-follower,
+.has-cursor .cursor-glow {
+    display: block;
+}
+.has-cursor.cursor-text .custom-cursor,
+.has-cursor.cursor-text .custom-cursor-follower,
+.has-cursor.cursor-away .custom-cursor,
+.has-cursor.cursor-away .custom-cursor-follower {
+    opacity: 0;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+}
+.custom-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--cursor-ring);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition:
+        width 0.4s var(--ease-out-expo),
+        height 0.4s var(--ease-out-expo),
+        background-color 0.4s,
+        border-color 0.4s,
+        opacity 0.3s;
+}
+body.cursor-hover .custom-cursor-follower {
+    width: 60px;
+    height: 60px;
+    background: var(--cursor-fill);
+}
+/* over a 3D element: a dashed reticle with a label, and the scene lights up under it */
+body.cursor-3d .custom-cursor-follower {
+    width: 84px;
+    height: 84px;
+    border: 1px dashed var(--accent);
+    animation: reticle 8s linear infinite;
+}
+.custom-cursor-follower::after {
+    content: attr(data-label);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    translate: -50% 0;
+    font: 0.65rem var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+body.cursor-3d .custom-cursor-follower::after {
+    opacity: 1;
+    animation: reticle 8s linear infinite reverse; /* keeps the label upright */
+}
+.cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--glow) 0%, rgba(16, 185, 129, 0.02) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+}
+
+/* ---- Grain ---- */
+#noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Preloader: desktop + motion only, pure CSS timing (see motion.css) ---- */
+.preloader {
+    display: none;
+}
+.preloader-mark {
+    font: 500 3rem var(--font-heading);
+    font-style: italic;
+    color: var(--text-primary);
+}
+.preloader-mark span {
+    color: var(--accent);
+}
+.preloader-bar {
+    width: 120px;
+    height: 1px;
+    background: var(--border-color);
+    overflow: hidden;
+}
+.preloader-bar i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+/* ---- Navigation ---- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition: background var(--transition-base);
+}
+.navbar.scrolled {
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+}
+.nav-content {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 1.25rem var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.7rem;
+    font-style: italic;
+    transition:
+        color 0.6s,
+        text-shadow 0.6s;
+}
+.egg .logo {
+    color: var(--accent);
+    text-shadow: 0 0 24px var(--accent);
+}
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-left: auto;
+}
+.nav-links a {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+.nav-cta-mobile {
+    display: none !important;
+}
+
+.nav-tools {
+    display: flex;
+    gap: 0.25rem;
+}
+.icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: none;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition:
+        color var(--transition-base),
+        border-color var(--transition-base),
+        translate 0.5s var(--ease-out-expo);
+}
+.icon-btn:hover,
+.icon-btn[aria-pressed='true'] {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+/* space is reserved before JS so turning these on causes no layout shift */
+.icon-btn:not(.is-ready) {
+    visibility: hidden;
+}
+
+.btn-hire {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--surface-hover);
+    border: 1px solid var(--border-hover);
+    transition:
+        background var(--transition-base),
+        color var(--transition-base),
+        translate 0.5s var(--ease-out-expo);
+}
+.btn-hire:hover {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+}
+.hire-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+}
+
+/* ---- Footer ---- */
+.footer {
+    padding: 3rem 0;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+.footer a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}

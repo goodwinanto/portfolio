@@ -1,0 +1,145 @@
+/*
+ * 3D: the shared WebGL canvas and the CSS-depth versions shown on phones, with reduced motion,
+ * without WebGL, or until the scene is live. `.has-3d` is set on <html> by the renderer.
+ */
+.gl-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* above the hero backdrop, below every section (same z, earlier in the DOM) */
+    pointer-events: none;
+}
+.gl-stack,
+.gl-path {
+    position: relative;
+}
+.gl-field {
+    position: absolute;
+    inset: 0;
+}
+.gl-graph {
+    pointer-events: auto; /* lets the cursor react to the graph even though the hero backdrop doesn't */
+}
+.css-depth {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.8s;
+    pointer-events: none;
+}
+.has-3d .css-depth,
+.has-3d .core-fallback,
+.has-3d .layer-grid {
+    opacity: 0;
+}
+/* project frames become clear windows onto the scene */
+.has-3d .mock {
+    background: var(--surface);
+    color: var(--mock-fg);
+}
+.has-3d .mock span {
+    color: var(--mock-fg);
+    opacity: 0.08;
+}
+.has-3d .mock code {
+    color: var(--text-secondary);
+    border-color: var(--border-hover);
+    background: var(--bg);
+    margin-top: auto;
+    margin-bottom: 14%;
+}
+
+/* ---- Services: three stacked layers ---- */
+.gl-stack {
+    width: min(100%, 360px);
+    aspect-ratio: 1;
+    margin: 1.5rem 0 0.5rem;
+}
+.stack-css {
+    display: grid;
+    place-items: center;
+    perspective: 900px;
+}
+.stack-css span {
+    grid-area: 1 / 1;
+    width: 52%;
+    aspect-ratio: 1;
+    border: 1px solid var(--accent-line);
+    border-radius: 10px;
+    background: var(--accent-soft);
+    transform: rotateX(58deg) rotateZ(-45deg) translateZ(var(--z));
+}
+.stack-css span:nth-child(1) {
+    --z: 70px;
+}
+.stack-css span:nth-child(2) {
+    --z: 0px;
+    border-color: var(--accent);
+}
+.stack-css span:nth-child(3) {
+    --z: -70px;
+}
+
+/* ---- Process: a path through four stops ---- */
+.gl-path {
+    height: clamp(140px, 18vw, 220px);
+    margin: -2rem 0 2rem;
+}
+.path-css {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12.5%;
+}
+.path-css::before {
+    content: '';
+    position: absolute;
+    left: 12.5%;
+    right: 12.5%;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
+}
+.path-css span {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 18px var(--accent-soft);
+}
+
+/* ---- Contact: signal rings behind the heading ---- */
+.gl-ring {
+    position: absolute;
+    left: 50%;
+    top: -6rem;
+    width: min(640px, 100%);
+    aspect-ratio: 1.6;
+    translate: -50% 0;
+    z-index: -1;
+}
+.ring-css {
+    display: grid;
+    place-items: center;
+    perspective: 700px;
+}
+.ring-css span {
+    grid-area: 1 / 1;
+    width: var(--r);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid var(--accent-line);
+    transform: rotateX(68deg);
+}
+.ring-css span:nth-child(1) {
+    --r: 70%;
+}
+.ring-css span:nth-child(2) {
+    --r: 50%;
+    border-style: dashed;
+}
+.ring-css span:nth-child(3) {
+    --r: 30%;
+}

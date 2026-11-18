@@ -1,17 +1,26 @@
 <!DOCTYPE html>
+<!--
+  © 2026 Goodwin Anto. All rights reserved.
+  The code, design, 3D scene, shaders and copy of this site are not licensed for copying or reuse.
+  Build signature: GA-LATENT-FIELD-2026-7c1e9d4b
+-->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- `js` class gates initial hidden states; script.js removes it again if GSAP fails to load -->
-    <script>document.documentElement.classList.add('js')</script>
+    <!-- Before first paint: `js` class (preloader, toggles) and the stored theme. Hash is pinned in the CSP. -->
+    <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
 
     <title>Goodwin Anto | AI Engineer, Web Developer &amp; WordPress Developer</title>
     <meta name="description"
         content="Goodwin Anto is an AI engineer and web developer. AI workflow systems, client websites, WordPress development and AI-assisted code analysis and transformation.">
     <link rel="canonical" href="https://portfolio-goodwinanto.vercel.app/">
-    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
+    <meta name="author" content="Goodwin Anto">
+    <meta name="copyright" content="© 2026 Goodwin Anto. All rights reserved.">
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
@@ -42,7 +51,8 @@
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="js/main.js"></script>
 
     <!-- Phosphor icons: exact version, deferred, SRI-pinned -->
     <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"
@@ -82,6 +92,12 @@
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
 
+    <!-- Preloader: a short CSS-only sequence, desktop with motion only; never waits on the network -->
+    <div class="preloader" aria-hidden="true">
+        <span class="preloader-mark">G<span>.</span></span>
+        <span class="preloader-bar"><i></i></span>
+    </div>
+
     <!-- Cursor, grain and glow (decorative) -->
     <div class="custom-cursor" aria-hidden="true"></div>
     <div class="custom-cursor-follower" aria-hidden="true"></div>
@@ -104,18 +120,27 @@
                 <a href="#faq">FAQ</a>
                 <a href="#contact" class="nav-cta-mobile">Start a project</a>
             </div>
+            <div class="nav-tools">
+                <button id="sound-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Interface sound" title="Interface sound (off by default)">
+                    <i class="ph ph-speaker-simple-x" aria-hidden="true"></i>
+                </button>
+                <button id="theme-toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Light theme" title="Toggle light theme">
+                    <i class="ph ph-circle-half" aria-hidden="true"></i>
+                </button>
+            </div>
             <a href="#contact" class="btn-hire"><span class="hire-dot" aria-hidden="true"></span> Start a project</a>
         </nav>
     </header>
 
     <main id="main">
         <!-- HERO -->
-        <section id="hero" class="hero-section">
+        <section id="hero" class="hero-section" data-gl-clip>
             <div class="hero-bg" aria-hidden="true">
+                <div class="gl-view gl-field" data-gl="field"></div>
                 <div class="layer layer-ambient"><div class="depth"><img src="assets/ambient_bg.webp" width="640" height="640" alt="" decoding="async"></div></div>
                 <div class="layer layer-grid"><div class="depth"></div></div>
                 <div class="layer layer-dust"><div class="depth"></div></div>
-                <div class="layer layer-core"><div class="depth"><img class="core-fallback" src="assets/hero_nodes.webp" width="720" height="720" alt="" decoding="async"></div></div>
+                <div class="layer layer-core"><div class="depth"><img class="core-fallback" src="assets/hero_nodes.webp" width="720" height="720" alt="" decoding="async"><div class="gl-view gl-graph" data-gl="graph" data-cursor="explore"></div></div></div>
                 <div class="layer layer-orbs"><div class="depth"><span class="orb orb-a"></span><span class="orb orb-b"></span></div></div>
             </div>
             <div class="container">
@@ -185,39 +210,43 @@
                     <h2 class="split">What I can build for you</h2>
                     <p class="section-lead">Focused services for teams that need websites, automation or AI work done properly.</p>
                     <p class="price-note">Project-based and hourly engagements available. <a href="#contact">Let's scope it out →</a></p>
+                    <div class="gl-view gl-stack" data-gl="stack" data-cursor="layers" aria-hidden="true">
+                        <div class="css-depth stack-css"><span></span><span></span><span></span></div>
+                    </div>
+                    <p class="stack-legend">Interface <span aria-hidden="true">/</span> Logic <span aria-hidden="true">/</span> Infrastructure</p>
                 </div>
                 <ul class="services-grid" role="list">
-                    <li class="service-card">
+                    <li class="service-card" data-layer="1">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-flow-arrow"></i></div>
                         <h3>AI Workflow &amp; Agent Systems</h3>
                         <p>Agents and automations that do real work: retrieval over your documents, multi-step workflows, and bots inside Teams or Slack.</p>
                         <ul class="service-tags" role="list"><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>n8n-style automations</li><li>Teams / Slack bots</li></ul>
                     </li>
-                    <li class="service-card">
+                    <li class="service-card" data-layer="0">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-browsers"></i></div>
                         <h3>Websites for Clients</h3>
                         <p>Custom-built sites that load fast, work for everyone and are ready to be found.</p>
                         <ul class="service-tags" role="list"><li>Custom builds</li><li>Fast</li><li>Accessible</li><li>SEO-ready</li></ul>
                     </li>
-                    <li class="service-card">
+                    <li class="service-card" data-layer="0">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-wordpress-logo"></i></div>
                         <h3>WordPress Development</h3>
                         <p>Custom themes and plugins, shops, page-builder work, plus speed and security hardening, migrations and maintenance.</p>
                         <ul class="service-tags" role="list"><li>Themes &amp; plugins</li><li>WooCommerce</li><li>Elementor / Gutenberg</li><li>Migrations</li><li>Hardening</li></ul>
                     </li>
-                    <li class="service-card">
+                    <li class="service-card" data-layer="1">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-code"></i></div>
                         <h3>AI Code Analysis &amp; Transformation</h3>
                         <p>Codebase audits, legacy modernisation, automated refactors and migrations, and test and docs generation, using LLM pipelines with human review.</p>
                         <ul class="service-tags" role="list"><li>Audits</li><li>Refactors</li><li>Migrations</li><li>Test generation</li><li>Docs</li></ul>
                     </li>
-                    <li class="service-card">
+                    <li class="service-card" data-layer="2">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-cloud"></i></div>
                         <h3>Cloud &amp; DevOps</h3>
                         <p>Infrastructure as code, Kubernetes and delivery pipelines for production workloads.</p>
                         <ul class="service-tags" role="list"><li>Azure</li><li>AWS</li><li>Terraform</li><li>AKS</li><li>CI/CD</li></ul>
                     </li>
-                    <li class="service-card">
+                    <li class="service-card" data-layer="1">
                         <div class="service-icon" aria-hidden="true"><i class="ph ph-puzzle-piece"></i></div>
                         <h3>Custom Automation &amp; Integrations</h3>
                         <p>If it's repetitive, it can be automated. APIs, webhooks and browser agents that slot into your existing stack.</p>
@@ -235,9 +264,18 @@
                     <h2 class="split">Selected projects</h2>
                 </div>
 
+                <div class="filter-bar" role="group" aria-label="Filter projects" hidden>
+                    <button type="button" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" data-filter="ai" aria-pressed="false">AI &amp; RAG</button>
+                    <button type="button" data-filter="automation" aria-pressed="false">Automation</button>
+                    <button type="button" data-filter="web" aria-pressed="false">Web &amp; WordPress</button>
+                    <button type="button" data-filter="tools" aria-pressed="false">Tools</button>
+                </div>
+                <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
+
                 <ul class="projects-grid" role="list">
-                    <li class="project-card">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-a"><div class="mock-inner"><span>01</span><code>query → cited answer</code></div></div></div>
+                    <li data-tags="ai" class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-a" data-gl="docs" data-cursor="view"><div class="mock-inner"><span>01</span><code>query → cited answer</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">Open source</p>
                             <h3>DocuMind RAG</h3>
@@ -251,8 +289,8 @@
                         </div>
                     </li>
 
-                    <li class="project-card">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-b"><div class="mock-inner"><span>02</span><code>sha256 ✓ verified</code></div></div></div>
+                    <li data-tags="tools" class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-b" data-gl="migrate" data-cursor="view"><div class="mock-inner"><span>02</span><code>sha256 ✓ verified</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">Open source</p>
                             <h3>AirMigrate</h3>
@@ -265,8 +303,8 @@
                         </div>
                     </li>
 
-                    <li class="project-card">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-c"><div class="mock-inner"><span>03</span><code>ticket → resolved</code></div></div></div>
+                    <li data-tags="ai automation" class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-c" data-gl="chat" data-cursor="view"><div class="mock-inner"><span>03</span><code>ticket → resolved</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">Enterprise deployment</p>
                             <h3>Enterprise IT Support Chatbot</h3>
@@ -280,8 +318,8 @@
                         </div>
                     </li>
 
-                    <li class="project-card">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-d"><div class="mock-inner"><span>04</span><code>form → filled</code></div></div></div>
+                    <li data-tags="automation ai" class="project-card">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-d" data-gl="form" data-cursor="view"><div class="mock-inner"><span>04</span><code>form → filled</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">Open source</p>
                             <h3>Job Application Automator</h3>
@@ -296,8 +334,8 @@
                     </li>
 
                     <!-- TODO(Goodwin): replace this placeholder with a real client website (name only if the client agrees) -->
-                    <li class="project-card is-placeholder">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-e"><div class="mock-inner"><span>05</span><code>coming soon</code></div></div></div>
+                    <li data-tags="web" class="project-card is-placeholder">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-e" data-gl="scaffold" data-cursor="view"><div class="mock-inner"><span>05</span><code>coming soon</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">Client website</p>
                             <h3>Client website</h3>
@@ -306,8 +344,8 @@
                     </li>
 
                     <!-- TODO(Goodwin): replace this placeholder with a real WordPress project -->
-                    <li class="project-card is-placeholder">
-                        <div class="project-media" aria-hidden="true"><div class="mock mock-f"><div class="mock-inner"><span>06</span><code>coming soon</code></div></div></div>
+                    <li data-tags="web" class="project-card is-placeholder">
+                        <div class="project-media" aria-hidden="true"><div class="mock mock-f" data-gl="scaffold" data-cursor="view"><div class="mock-inner"><span>06</span><code>coming soon</code></div></div></div>
                         <div class="project-body">
                             <p class="impact-badge">WordPress</p>
                             <h3>WordPress project</h3>
@@ -324,6 +362,9 @@
                 <div class="section-header">
                     <p class="eyebrow">04 / Process</p>
                     <h2 class="split">How I work</h2>
+                </div>
+                <div class="gl-view gl-path" data-gl="path" data-cursor="process" aria-hidden="true">
+                    <div class="css-depth path-css"><span></span><span></span><span></span><span></span></div>
                 </div>
                 <ol class="steps" role="list">
                     <li class="step reveal"><span class="step-n">01</span><h3>Scope</h3><p>We agree the goal, the deliverables and a fixed first milestone.</p></li>
@@ -410,6 +451,9 @@
         <section id="contact" class="section">
             <div class="container">
                 <div class="contact-box">
+                    <div class="gl-view gl-ring" data-gl="ring" data-cursor="signal" aria-hidden="true">
+                        <div class="css-depth ring-css"><span></span><span></span><span></span></div>
+                    </div>
                     <div class="avail-pill"><span class="pulse-dot" aria-hidden="true"></span> Taking on new projects</div>
                     <h2 class="split">Let's build something.</h2>
                     <p class="reveal">Have a website, an AI workflow or a legacy codebase in mind? Tell me about it and I'll reply with next steps.</p>
@@ -420,9 +464,21 @@
                         <input type="hidden" name="from_name" value="Portfolio contact form">
                         <!-- Honeypot: hidden from people, bots fill it in -->
                         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                        <label>Name<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
-                        <label>Email<input type="email" name="email" required maxlength="254" autocomplete="email"></label>
-                        <label class="full">Project details<textarea name="message" rows="4" required maxlength="5000"></textarea></label>
+                        <div class="field">
+                            <label for="f-name">Name</label>
+                            <input id="f-name" type="text" name="name" required maxlength="100" autocomplete="name" aria-describedby="f-name-err">
+                            <span class="field-error" id="f-name-err"></span>
+                        </div>
+                        <div class="field">
+                            <label for="f-email">Email</label>
+                            <input id="f-email" type="email" name="email" required maxlength="254" autocomplete="email" aria-describedby="f-email-err">
+                            <span class="field-error" id="f-email-err"></span>
+                        </div>
+                        <div class="field full">
+                            <label for="f-message">Project details</label>
+                            <textarea id="f-message" name="message" rows="4" required maxlength="5000" aria-describedby="f-message-err"></textarea>
+                            <span class="field-error" id="f-message-err"></span>
+                        </div>
                         <button type="submit" class="btn btn-primary">Send message</button>
                         <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
                     </form>
@@ -442,18 +498,11 @@
 
     <footer class="footer">
         <div class="container footer-container">
-            <p>Goodwin Anto &copy; 2026. All rights reserved.</p>
+            <p>&copy; 2026 Goodwin Anto. All rights reserved.</p>
             <a href="#hero">Back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"
-        integrity="sha384-Q0QJmTaiVLQTTXxcTzx8VTet6f+0c0Zj+VwG6WTkv6Xd4YxCWhAsB4iy8gAAvzEX" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
