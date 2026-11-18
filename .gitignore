@@ -1,2 +1,7 @@
 _refs/
 node_modules/
+dist/
+test-results/
+playwright-report/
+.probe.mjs
+.views.mjs
