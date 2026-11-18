@@ -49,7 +49,8 @@ tests/                     Playwright smoke tests
 One fixed, transparent `<canvas>` sits behind the page with a single WebGL context. Every element
 with `data-gl="<shape>"` is a view: each frame the renderer draws that shape into the element's box
 using a scissored viewport, as one task in the shared loop. Shapes: `field` (contour shader),
-`graph`, `stack`, `docs`, `migrate`, `chat`, `form`, `scaffold`, `path`, `ring`.
+`graph`, `orbit`, `stack`, `docs`, `migrate`, `chat`, `form`, `scaffold`, `path`, `helix`, `lattice`,
+`ring`. Each shape assembles from scattered points the first time it scrolls into view.
 
 The scene only loads on screens ≥ 768px with motion allowed, ≥ 4 CPU cores, a hardware GPU and a
 fast connection. Everywhere else (phones, reduced motion, no WebGL, context loss, chunk load

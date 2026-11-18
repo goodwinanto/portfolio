@@ -8,6 +8,15 @@ import { SIGNATURE } from '../config.js';
 
 const HEADER = `// (c) 2026 Goodwin Anto. All rights reserved. ${SIGNATURE}\n`;
 
+/* Assemble-in: before uAssemble reaches 1, each vertex is pushed out along a direction derived from its seed. */
+const SCATTER = `
+uniform mediump float uAssemble; // 0 = scattered, 1 = formed (mediump: shared with the fragment stage)
+vec3 assemble(vec3 p, float seed) {
+  vec3 dir = fract(vec3(seed * 13.7, seed * 71.3, seed * 39.1)) - 0.5;
+  float k = 1.0 - uAssemble;
+  return p + dir * 4.0 * k * k;
+}`;
+
 /** Shared attribute names per location. */
 export const ATTRIBUTES = ['aPos', 'aAux', 'aPhase'];
 
@@ -20,8 +29,9 @@ uniform vec2 uMouse;  // cursor in clip space; far away when outside the view
 uniform vec4 uFocus;  // xyz focus point, w radius (0 = off)
 uniform float uTime, uPx, uDepth, uSize, uEnergy;
 varying float vLight;
+${SCATTER}
 void main() {
-  vec4 clip = uMVP * vec4(aPos, 1.0);
+  vec4 clip = uMVP * vec4(assemble(aPos, aAux), 1.0);
   gl_Position = clip;
   float near = smoothstep(0.5, 0.0, distance(clip.xy / clip.w, uMouse));
   float fog = clamp((uDepth + 1.3 - clip.w) / 2.6, 0.0, 1.0);
@@ -35,14 +45,14 @@ void main() {
 export const POINT_FRAGMENT = `${HEADER}
 precision mediump float;
 uniform vec3 uInk, uCore;
-uniform float uAlpha;
+uniform float uAlpha, uAssemble;
 varying float vLight;
 void main() {
   float r = length(gl_PointCoord - 0.5) * 2.0;
   float halo = smoothstep(1.0, 0.0, r);
   halo *= halo;
   vec3 col = mix(uInk, uCore, smoothstep(0.35, 0.0, r));
-  float a = halo * vLight * uAlpha;
+  float a = halo * vLight * uAlpha * (0.3 + 0.7 * uAssemble);
   gl_FragColor = vec4(col * a, a); // premultiplied
 }`;
 
@@ -56,8 +66,9 @@ uniform vec2 uMouse;
 uniform vec4 uFocus;
 uniform float uDepth;
 varying float vFog, vEdge, vPhase, vLift;
+${SCATTER}
 void main() {
-  vec4 clip = uMVP * vec4(aPos, 1.0);
+  vec4 clip = uMVP * vec4(assemble(aPos, aPhase), 1.0); // both ends share a phase, so edges move rigidly
   gl_Position = clip;
   float near = smoothstep(0.5, 0.0, distance(clip.xy / clip.w, uMouse));
   float focus = uFocus.w > 0.0 ? smoothstep(uFocus.w, 0.0, distance(aPos, uFocus.xyz)) : 0.0;
@@ -70,11 +81,11 @@ void main() {
 export const LINE_FRAGMENT = `${HEADER}
 precision mediump float;
 uniform vec3 uInk, uCore;
-uniform float uTime, uSpeed, uAlpha, uEnergy;
+uniform float uTime, uSpeed, uAlpha, uEnergy, uAssemble;
 varying float vFog, vEdge, vPhase, vLift;
 void main() {
   float pulse = smoothstep(0.18, 0.0, abs(fract(uTime * uSpeed + vPhase) - vEdge));
-  float a = ((0.2 + vLift * 0.45) + pulse * 0.8) * vFog * (1.0 + uEnergy) * uAlpha;
+  float a = ((0.2 + vLift * 0.45) + pulse * 0.8) * vFog * (1.0 + uEnergy) * uAlpha * uAssemble * uAssemble;
   gl_FragColor = vec4(mix(uInk, uCore, pulse) * a, a);
 }`;
 

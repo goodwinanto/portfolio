@@ -23,7 +23,7 @@ const LINE_LAYOUT = [3, 1, 1];
 const QUAD = new Float32Array([-1, -1, 0, 1, -1, 0, -1, 1, 0, 1, 1, 0]);
 const UNIFORMS = [
     'uMVP', 'uMouse', 'uFocus', 'uTime', 'uPx', 'uDepth', 'uSize', 'uEnergy', 'uInk', 'uCore',
-    'uAlpha', 'uSpeed', 'uAspect', 'uScroll',
+    'uAlpha', 'uSpeed', 'uAspect', 'uScroll', 'uAssemble',
 ]; // prettier-ignore
 
 const readTheme = () => GL_THEMES[currentTheme()];
@@ -174,6 +174,7 @@ export function start() {
             gl.uniform1f(prog.u.uSize, p.size);
             gl.uniform1f(prog.u.uSpeed, p.speed);
             gl.uniform1f(prog.u.uAlpha, p.alpha * theme.alpha);
+            gl.uniform1f(prog.u.uAssemble, f.assemble);
             bindLayout(gl, buffer, layout);
             gl.drawArrays(mode, 0, count);
         }

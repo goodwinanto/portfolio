@@ -99,6 +99,9 @@
         font-size: 1.15rem;
     }
     /* phones get no hero raster (see the <picture> source); this CSS core gives the depth instead */
+    .layer-core img {
+        display: none;
+    }
     .layer-core .depth::before {
         content: '';
         position: absolute;
@@ -126,5 +129,12 @@
     }
     .gl-path {
         margin: -1rem 0 1rem;
+    }
+    .gl-orbit {
+        width: min(100%, 220px);
+        margin-top: 0;
+    }
+    .gl-helix {
+        height: 200px;
     }
 }

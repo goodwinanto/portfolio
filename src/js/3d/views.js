@@ -6,7 +6,7 @@
 import { EVENTS } from '../config.js';
 import { $, $$ } from '../dom.js';
 import { clamp, lerp } from '../loop.js';
-import { PATH_STOPS, pathPoint, STACK_LAYERS } from './geometry.js';
+import { helixPoint, ORBIT_SKILLS, orbitNode, PATH_STOPS, pathPoint, STACK_LAYERS } from './geometry.js';
 import { multiply, perspective, rotateX, rotateY, translateZ } from './math.js';
 
 const FOV_Y = 0.7;
@@ -23,6 +23,13 @@ const STACK_CYCLE_S = 3.5;
 const STACK_FOCUS_RADIUS = 0.75;
 const STACK_SCAN = 0.5;
 const PATH_FOCUS_RADIUS = 0.5;
+const SKILL_FOCUS_RADIUS = 0.3;
+const SKILL_CYCLE_S = 1.6;
+const HELIX_FOCUS_RADIUS = 0.55;
+const FAQ_KICK = 1.2;
+/** Seconds a view takes to assemble from scattered points the first time it is drawn. */
+const ASSEMBLE_S = 1.8;
+const easeOutCubic = (t) => 1 - (1 - t) ** 3;
 
 /** @typedef {{ shape: string, distance: number, spin: number, tilt: number, size: number, alpha: number, speed: number, mouseTilt: number, scrollSpin?: number, scrollTilt?: number, scrollDolly?: number }} Preset */
 
@@ -41,15 +48,19 @@ export const PRESETS = {
     scaffold: { ...PROJECT, shape: 'scaffold', alpha: 0.6 },
     path: { ...BASE, shape: 'path', distance: 2.2, spin: 0, tilt: 0.2, mouseTilt: 0.25, size: 0.9 },
     ring: { ...BASE, shape: 'ring', distance: 3.6, tilt: 1.05, spin: 0.1, speed: 0.4 },
+    orbit: { ...BASE, shape: 'orbit', distance: 3.5, tilt: 0.35, spin: 0.2 },
+    helix: { ...BASE, shape: 'helix', distance: 3.6, tilt: 0.12, spin: 0.35, speed: 0.35 },
+    lattice: { ...BASE, shape: 'lattice', distance: 4.6, tilt: 0.55, spin: 0.12, size: 0.9 },
 };
 
 /**
- * Listens for the page events that drive the scene (active service, scroll through the
- * process, typing and sending in the contact form, the easter egg).
+ * Listens for the page events that drive the scene (active service, hovered skill, opened FAQ,
+ * typing and sending in the contact form, the easter egg).
  * @returns {{ inputs: object, dispose: () => void }}
  */
 export function createInputs() {
-    const inputs = { layer: -1, energy: 0, ringEnergy: 0, pointer: { x: -1e4, y: -1e4 } };
+    // kicks: per-shape energy bursts (contact ring, FAQ lattice) that decay each frame
+    const inputs = { layer: -1, skill: -1, energy: 0, kicks: { ring: 0, lattice: 0 }, pointer: { x: -1e4, y: -1e4 } };
     const off = [];
     const on = (target, type, fn, opts) => {
         target?.addEventListener(type, fn, opts);
@@ -65,9 +76,14 @@ export function createInputs() {
         on(card, 'pointerleave', unset);
         on(card, 'focusout', unset);
     }
+    $$('.skill-tag').forEach((tag, i) => {
+        on(tag, 'pointerenter', () => (inputs.skill = i % ORBIT_SKILLS));
+        on(tag, 'pointerleave', () => (inputs.skill = -1));
+    });
+    for (const d of $$('.faq details')) on(d, 'toggle', () => d.open && (inputs.kicks.lattice = FAQ_KICK));
     const form = $('#contact-form');
-    on(form, 'input', () => (inputs.ringEnergy = Math.min(1, inputs.ringEnergy + TYPING_KICK)));
-    on(form, EVENTS.FORM_SENT, () => (inputs.ringEnergy = SENT_KICK));
+    on(form, 'input', () => (inputs.kicks.ring = Math.min(1, inputs.kicks.ring + TYPING_KICK)));
+    on(form, EVENTS.FORM_SENT, () => (inputs.kicks.ring = SENT_KICK));
     on(window, EVENTS.EGG, () => (inputs.energy = EGG_KICK));
     return { inputs, dispose: () => off.forEach((fn) => fn()) };
 }
@@ -78,7 +94,7 @@ export function createInputs() {
  * @param {DOMRect} rect the element's box this frame
  * @param {number} time seconds
  * @param {object} inputs from createInputs
- * @returns {{ mvp: Float32Array, mouse: number[], focus: number[], energy: number, depth: number, scroll: number }}
+ * @returns {{ mvp: Float32Array, mouse: number[], focus: number[], energy: number, depth: number, scroll: number, assemble: number }}
  */
 export function frameParams(view, rect, time, inputs) {
     const p = view.preset;
@@ -95,8 +111,10 @@ export function frameParams(view, rect, time, inputs) {
         p.shape === 'graph' || p.field
             ? clamp(window.scrollY / (rect.height || 1))
             : clamp(((rect.top + rect.height / 2) / innerHeight) * 2 - 1, -1, 1);
-    const energy = inputs.energy + (p.shape === 'ring' ? inputs.ringEnergy : 0);
-    if (p.field) return { mvp: null, mouse, focus: [0, 0, 0, 0], energy, depth: 0, scroll };
+    const energy = inputs.energy + (inputs.kicks[p.shape] ?? 0);
+    if (p.field) return { mvp: null, mouse, focus: [0, 0, 0, 0], energy, depth: 0, scroll, assemble: 1 };
+    view.born ??= time;
+    const assemble = easeOutCubic(clamp((time - view.born) / ASSEMBLE_S));
 
     const dolly = p.scrollDolly ? scroll * p.scrollDolly : 0;
     const depth = p.distance + dolly;
@@ -118,8 +136,14 @@ export function frameParams(view, rect, time, inputs) {
         const t = clamp((innerHeight * 0.75 - rect.top) / (innerHeight * 0.75)); // 0 entering .. 1 at the top quarter
         const snapped = Math.round(t * (PATH_STOPS - 1)) / (PATH_STOPS - 1);
         focus = [...pathPoint(lerp(t, snapped, 0.35)), PATH_FOCUS_RADIUS];
+    } else if (p.shape === 'orbit') {
+        const skill = inputs.skill >= 0 ? inputs.skill : Math.floor(time / SKILL_CYCLE_S) % ORBIT_SKILLS;
+        focus = [...orbitNode(skill), SKILL_FOCUS_RADIUS];
+    } else if (p.shape === 'helix') {
+        // the highlight climbs the helix (earliest role at the bottom) as the section scrolls past
+        focus = [...helixPoint(clamp(1 - (rect.top + rect.height / 2) / innerHeight)), HELIX_FOCUS_RADIUS];
     }
-    return { mvp, mouse, focus, energy, depth, scroll };
+    return { mvp, mouse, focus, energy, depth, scroll, assemble };
 }
 
 /**
@@ -128,5 +152,5 @@ export function frameParams(view, rect, time, inputs) {
  */
 export function decayInputs(inputs) {
     inputs.energy *= ENERGY_DECAY;
-    inputs.ringEnergy *= ENERGY_DECAY;
+    for (const k of Object.keys(inputs.kicks)) inputs.kicks[k] *= ENERGY_DECAY;
 }

@@ -11,7 +11,9 @@
     pointer-events: none;
 }
 .gl-stack,
-.gl-path {
+.gl-path,
+.gl-orbit,
+.gl-helix {
     position: relative;
 }
 .gl-field {
@@ -142,4 +144,34 @@
 }
 .ring-css span:nth-child(3) {
     --r: 30%;
+}
+
+/* ---- About: skills orbit ---- */
+.gl-orbit {
+    width: min(100%, 320px);
+    aspect-ratio: 1;
+    margin: -2rem auto 1.5rem;
+}
+
+/* ---- Experience: career helix ---- */
+.gl-helix {
+    height: 300px;
+    margin-top: 2.5rem;
+}
+
+/* ---- FAQ: answer lattice, in the empty space beside the questions on wide screens ---- */
+.faq-wrap {
+    position: relative;
+}
+.gl-lattice {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 240px;
+    aspect-ratio: 1;
+}
+@media (max-width: 1399px) {
+    .gl-lattice {
+        display: none;
+    }
 }

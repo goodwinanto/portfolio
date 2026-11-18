@@ -291,7 +291,95 @@ function ring(b) {
     for (const r of [0.55, 0.78, 1.25]) b.path(circle(r, 64), true);
 }
 
-const BUILDERS = { graph, stack, docs, migrate, chat, form, scaffold, path, ring };
+/** About: three tilted orbits carrying one node per core skill, around a small core. */
+const ORBITS = [
+    { radius: 0.55, tiltX: 0.3, tiltZ: 0.2 },
+    { radius: 0.85, tiltX: -0.5, tiltZ: 0.6 },
+    { radius: 1.15, tiltX: 0.9, tiltZ: -0.4 },
+];
+export const ORBIT_SKILLS = 12;
+const tilt = ([x, y, z], { tiltX, tiltZ }) => {
+    const y1 = y * Math.cos(tiltX) - z * Math.sin(tiltX);
+    const z1 = y * Math.sin(tiltX) + z * Math.cos(tiltX);
+    return [x * Math.cos(tiltZ) - y1 * Math.sin(tiltZ), x * Math.sin(tiltZ) + y1 * Math.cos(tiltZ), z1];
+};
+/**
+ * @param {number} i skill index, 0..ORBIT_SKILLS-1
+ * @returns {number[]} xyz of that skill's node
+ */
+export function orbitNode(i) {
+    const perOrbit = ORBIT_SKILLS / ORBITS.length;
+    const o = ORBITS[i % ORBITS.length];
+    const a = (Math.floor(i / ORBITS.length) / perOrbit) * TAU + i;
+    return tilt([Math.cos(a) * o.radius, 0, Math.sin(a) * o.radius], o);
+}
+function orbit(b) {
+    const CORE = 40;
+    for (const o of ORBITS)
+        b.path(
+            circle(o.radius, 72).map((p) => tilt(p, o)),
+            true,
+        );
+    for (let i = 0; i < ORBIT_SKILLS; i++) {
+        const n = orbitNode(i);
+        b.point(n)
+            .point(n)
+            .path([[0, 0, 0], n]);
+    }
+    for (let i = 0; i < CORE; i++) b.point([(b.rng() - 0.5) * 0.3, (b.rng() - 0.5) * 0.3, (b.rng() - 0.5) * 0.3]);
+}
+
+/** Experience: a double helix (the career timeline); rungs link the strands. */
+const HELIX_HEIGHT = 1.2;
+const HELIX_RADIUS = 0.45;
+const HELIX_TURNS = 1.75;
+/**
+ * @param {number} t 0 (bottom, earliest) .. 1 (top, latest)
+ * @returns {number[]} xyz on the helix axis
+ */
+export const helixPoint = (t) => [0, (t * 2 - 1) * HELIX_HEIGHT, 0];
+function helix(b) {
+    const STEPS = 90;
+    const RUNG_EVERY = 6;
+    const strand = (offset) =>
+        range(STEPS + 1).map((i) => {
+            const t = i / STEPS;
+            const a = t * TAU * HELIX_TURNS + offset;
+            return [Math.cos(a) * HELIX_RADIUS, helixPoint(t)[1], Math.sin(a) * HELIX_RADIUS];
+        });
+    const a = strand(0);
+    const c = strand(Math.PI);
+    b.path(a).path(c);
+    a.forEach((p, i) => {
+        if (i % 2) return;
+        b.point(p).point(c[i]);
+        if (i % RUNG_EVERY === 0) b.path([p, c[i]]);
+    });
+}
+
+/** FAQ: a 4×4×4 lattice of answers; a random subset of edges carries pulses. */
+function lattice(b) {
+    const N = 4;
+    const STEP = 0.55;
+    const EDGE_CHANCE = 0.45;
+    const at = (i, j, k) => [(i - (N - 1) / 2) * STEP, (j - (N - 1) / 2) * STEP, (k - (N - 1) / 2) * STEP];
+    for (const i of range(N))
+        for (const j of range(N))
+            for (const k of range(N)) {
+                b.point(at(i, j, k));
+                for (const [di, dj, dk] of [
+                    [1, 0, 0],
+                    [0, 1, 0],
+                    [0, 0, 1],
+                ]) {
+                    // prettier-ignore
+                    if (i + di < N && j + dj < N && k + dk < N && b.rng() < EDGE_CHANCE)
+                        b.path([at(i, j, k), at(i + di, j + dj, k + dk)]);
+                }
+            }
+}
+
+const BUILDERS = { graph, stack, docs, migrate, chat, form, scaffold, path, ring, orbit, helix, lattice };
 
 /**
  * Builds the geometry for one shape. The seed mixes the signature with the shape name.
