@@ -93,7 +93,21 @@ const options = {
 async function copyStatic() {
     await cp(path.join(ROOT, 'public'), DIST, { recursive: true });
     await cp(path.join(ROOT, GEIST.from), path.join(DIST, GEIST.to));
+    await writeThirdPartyLicences();
     await Promise.all(HTML_PAGES.map((p) => cp(path.join(ROOT, 'src', p), path.join(DIST, p))));
+}
+
+/** Ships the licence text of every runtime dependency, as MIT and OFL require. */
+async function writeThirdPartyLicences() {
+    const pkg = JSON.parse(await readFile(path.join(ROOT, 'package.json'), 'utf8'));
+    const parts = await Promise.all(
+        Object.keys(pkg.dependencies).map(async (name) => {
+            const dir = path.join(ROOT, 'node_modules', name);
+            const file = (await readdir(dir)).find((f) => /^licen[cs]e/i.test(f));
+            return `== ${name}@${await pkgVersion(name)} ==\n\n${await readFile(path.join(dir, file), 'utf8')}`;
+        }),
+    );
+    await writeFile(path.join(DIST, 'third-party-licenses.txt'), parts.join('\n\n'));
 }
 
 /** Fails the build if an inline script in dist/*.html is missing from the CSP script-src. */
