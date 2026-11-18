@@ -43,21 +43,13 @@
     <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-    <!-- Fonts: Geist (Google) + Clash Display (Fontshare), both font-display: swap -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts: Geist is self-hosted (bundled CSS); Clash Display comes from Fontshare at the end of <body>. Both swap. -->
     <link rel="preconnect" href="https://api.fontshare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 
     <link rel="stylesheet" href="css/main.css">
     <script type="module" src="js/main.js"></script>
 
-    <!-- Phosphor icons: exact version, deferred, SRI-pinned -->
-    <script defer src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"
-        integrity="sha384-cPFV+/abYd3INVFHPmSKpBmcnH+Q+bTZW7dv/EiuShUNPkHyFmRF8PsL7Ibfvunk"
-        crossorigin="anonymous"></script>
 
     <script type="application/ld+json">
     {
@@ -140,7 +132,7 @@
                 <div class="layer layer-ambient"><div class="depth"><img src="assets/ambient_bg.webp" width="640" height="640" alt="" decoding="async"></div></div>
                 <div class="layer layer-grid"><div class="depth"></div></div>
                 <div class="layer layer-dust"><div class="depth"></div></div>
-                <div class="layer layer-core"><div class="depth"><img class="core-fallback" src="assets/hero_nodes.webp" width="720" height="720" alt="" decoding="async"><div class="gl-view gl-graph" data-gl="graph" data-cursor="explore"></div></div></div>
+                <div class="layer layer-core"><div class="depth"><picture><source media="(max-width: 768px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><img class="core-fallback" src="assets/hero_nodes.webp" width="720" height="720" alt="" fetchpriority="high"></picture><div class="gl-view gl-graph" data-gl="graph" data-cursor="explore"></div></div></div>
                 <div class="layer layer-orbs"><div class="depth"><span class="orb orb-a"></span><span class="orb orb-b"></span></div></div>
             </div>
             <div class="container">
@@ -179,13 +171,13 @@
                             <li class="skill-tag"><i class="ph ph-code" aria-hidden="true"></i> Python</li>
                             <li class="skill-tag"><i class="ph ph-cloud" aria-hidden="true"></i> Azure</li>
                             <li class="skill-tag"><i class="ph ph-cloud" aria-hidden="true"></i> AWS</li>
-                            <li class="skill-tag"><i class="ph ph-docker-logo" aria-hidden="true"></i> Docker</li>
+                            <li class="skill-tag"><i class="ph ph-cube" aria-hidden="true"></i> Docker</li>
                             <li class="skill-tag"><i class="ph ph-hexagon" aria-hidden="true"></i> AKS</li>
                             <li class="skill-tag"><i class="ph ph-file-code" aria-hidden="true"></i> Terraform</li>
                             <li class="skill-tag"><i class="ph ph-arrows-merge" aria-hidden="true"></i> CI/CD</li>
                             <li class="skill-tag"><i class="ph ph-brain" aria-hidden="true"></i> LLM/RAG</li>
                             <li class="skill-tag"><i class="ph ph-link" aria-hidden="true"></i> LangChain</li>
-                            <li class="skill-tag"><i class="ph ph-wordpress-logo" aria-hidden="true"></i> WordPress</li>
+                            <li class="skill-tag"><i class="ph ph-layout" aria-hidden="true"></i> WordPress</li>
                             <li class="skill-tag"><i class="ph ph-terminal" aria-hidden="true"></i> PowerShell</li>
                             <li class="skill-tag"><i class="ph ph-git-merge" aria-hidden="true"></i> Azure DevOps</li>
                         </ul>
@@ -229,7 +221,7 @@
                         <ul class="service-tags" role="list"><li>Custom builds</li><li>Fast</li><li>Accessible</li><li>SEO-ready</li></ul>
                     </li>
                     <li class="service-card" data-layer="0">
-                        <div class="service-icon" aria-hidden="true"><i class="ph ph-wordpress-logo"></i></div>
+                        <div class="service-icon" aria-hidden="true"><i class="ph ph-layout"></i></div>
                         <h3>WordPress Development</h3>
                         <p>Custom themes and plugins, shops, page-builder work, plus speed and security hardening, migrations and maintenance.</p>
                         <ul class="service-tags" role="list"><li>Themes &amp; plugins</li><li>WooCommerce</li><li>Elementor / Gutenberg</li><li>Migrations</li><li>Hardening</li></ul>
@@ -502,6 +494,9 @@
             <a href="#hero">Back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
         </div>
     </footer>
+
+    <!-- Display font: linked at the end of <body> so it never blocks first paint -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500&display=swap" rel="stylesheet">
 
 </body>
 

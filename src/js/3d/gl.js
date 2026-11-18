@@ -19,7 +19,7 @@ const SOFTWARE_RENDERER = /swiftshader|llvmpipe|softpipe|software/i;
  * @returns {WebGLRenderingContext | null} a hardware-accelerated context, or null
  */
 export function getContext(canvas) {
-    let gl = null;
+    let gl;
     try {
         gl = canvas.getContext('webgl', CONTEXT_OPTIONS);
     } catch {

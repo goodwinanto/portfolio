@@ -45,6 +45,7 @@
     }
     .mobile-menu-btn {
         display: block;
+        order: 1; /* after the theme/sound tools, at the far right */
     }
     .nav-links {
         display: none;
@@ -97,9 +98,21 @@
     .faq summary {
         font-size: 1.15rem;
     }
-    .layer-core img {
-        right: -30%;
-        width: 110vw;
+    /* phones get no hero raster (see the <picture> source); this CSS core gives the depth instead */
+    .layer-core .depth::before {
+        content: '';
+        position: absolute;
+        right: -35%;
+        top: 12%;
+        width: 105vw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background:
+            repeating-radial-gradient(circle, transparent 0 22px, var(--accent-line) 23px 24px, transparent 25px 46px),
+            radial-gradient(circle at 40% 40%, var(--orb-a), transparent 65%);
+        mask-image: radial-gradient(circle, #000 25%, transparent 70%);
+        transform: perspective(600px) rotateX(55deg) rotateZ(-20deg);
+        opacity: 0.6;
     }
     .filter-bar {
         margin-top: -1.5rem;
