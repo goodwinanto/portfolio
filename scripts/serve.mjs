@@ -6,10 +6,12 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { gzipSync } from 'node:zlib';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DIST = path.join(ROOT, 'dist');
 const PORT = Number(process.argv[2]) || 4173;
+const COMPRESSIBLE = /\.(html|js|css|txt|xml|json|svg)$/;
 const TYPES = {
     '.html': 'text/html; charset=utf-8',
     '.js': 'text/javascript',
@@ -21,7 +23,10 @@ const TYPES = {
 };
 const vercel = JSON.parse(await readFile(path.join(ROOT, 'vercel.json'), 'utf8'));
 // shortcut: only the "/(.*)" and "/prefix/(.*)" source shapes used in vercel.json are supported
-const rules = vercel.headers.map((r) => ({ re: new RegExp(`^${r.source.replace('(.*)', '.*')}$`), headers: r.headers }));
+const rules = vercel.headers.map((r) => ({
+    re: new RegExp(`^${r.source.replace('(.*)', '.*')}$`),
+    headers: r.headers,
+}));
 
 createServer(async (req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -29,8 +34,14 @@ createServer(async (req, res) => {
     const file = path.join(DIST, url.endsWith('/') ? `${url}index.html` : url);
     if (!file.startsWith(DIST)) return res.writeHead(400).end();
     try {
-        const body = await readFile(file);
-        res.writeHead(200, { 'Content-Type': TYPES[path.extname(file)] ?? 'application/octet-stream' }).end(body);
+        let body = await readFile(file);
+        const headers = { 'Content-Type': TYPES[path.extname(file)] ?? 'application/octet-stream' };
+        // compress like Vercel does, so local Lighthouse numbers are comparable
+        if (COMPRESSIBLE.test(file) && /gzip/.test(req.headers['accept-encoding'] ?? '')) {
+            body = gzipSync(body);
+            headers['Content-Encoding'] = 'gzip';
+        }
+        res.writeHead(200, headers).end(body);
     } catch {
         res.writeHead(404, { 'Content-Type': TYPES['.html'] }).end(await readFile(path.join(DIST, '404.html')));
     }
