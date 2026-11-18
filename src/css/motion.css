@@ -1,0 +1,138 @@
+/* Motion. Everything here is opt-in via prefers-reduced-motion: no-preference. */
+
+@view-transition {
+    navigation: auto; /* cross-document fade between pages (index ↔ 404); ignored where unsupported */
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+@keyframes preloader-fill {
+    to {
+        transform: scaleX(1);
+    }
+}
+@keyframes preloader-out {
+    to {
+        clip-path: inset(0 0 100% 0);
+        visibility: hidden;
+    }
+}
+@keyframes marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
+@keyframes reticle {
+    to {
+        rotate: 360deg;
+    }
+}
+@keyframes float {
+    50% {
+        translate: 0 -10px;
+    }
+}
+@keyframes spin {
+    to {
+        transform: rotateX(68deg) rotateZ(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+    .marquee-track {
+        animation: marquee 40s linear infinite;
+    }
+    .stack-css {
+        animation: float 6s ease-in-out infinite;
+    }
+    .ring-css span {
+        animation: spin 30s linear infinite;
+    }
+    .ring-css span:nth-child(2) {
+        animation-direction: reverse;
+    }
+
+    /* Scroll reveals; reveal.js adds .reveal-on, so without it nothing is ever hidden */
+    .reveal-on :is(.reveal, .service-card, .project-card) {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+            opacity 1s var(--ease-out-expo),
+            transform 1s var(--ease-out-expo);
+    }
+    .reveal-on :is(.reveal, .service-card, .project-card).is-in {
+        opacity: 1;
+        transform: none;
+    }
+    .reveal-on .split .wi {
+        transform: translateY(110%);
+        transition: transform 1.1s var(--ease-out-expo);
+    }
+    .reveal-on .split.is-in .wi {
+        transform: none;
+    }
+}
+.split .w {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+}
+.split .wi {
+    display: inline-block;
+}
+
+/* Desktop: preloader, then the hero rises. Phones skip both so the LCP text paints at once. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .js .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 10002;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        background: var(--bg);
+        pointer-events: none;
+        animation: preloader-out var(--preloader-exit) var(--ease-out-expo) var(--preloader-hold) forwards;
+    }
+    .js .preloader-bar i {
+        animation: preloader-fill var(--preloader-hold) ease-out forwards;
+    }
+    .hero-in {
+        animation: rise 1.1s var(--ease-out-expo) both;
+        animation-delay: calc(var(--preloader-hold) * 0.6 + var(--stagger, 0s));
+    }
+    .hero-content > .hero-in:nth-child(2) {
+        --stagger: 0.08s;
+    }
+    .hero-content > .hero-in:nth-child(3) {
+        --stagger: 0.16s;
+    }
+    .hero-content > .hero-in:nth-child(4) {
+        --stagger: 0.24s;
+    }
+    .hero-content > .hero-in:nth-child(5) {
+        --stagger: 0.32s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee {
+        overflow-x: auto;
+    }
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+}

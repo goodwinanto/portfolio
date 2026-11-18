@@ -1,0 +1,183 @@
+/* Reset, typography and accessibility primitives */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg);
+    color: var(--text-primary);
+    scroll-padding-top: var(--nav-offset);
+}
+
+body {
+    background: var(--bg);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+ul,
+ol {
+    list-style: none;
+}
+[hidden] {
+    display: none !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-family: var(--font-heading);
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+/* ---- Accessibility ---- */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+/* targets of in-page links get programmatic focus; no ring for that */
+[tabindex='-1']:focus {
+    outline: none;
+}
+
+.skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 10003;
+    padding: 0.6rem 1rem;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border-radius: var(--radius-md);
+    transform: translateY(-200%);
+}
+.skip-link:focus {
+    transform: none;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---- Layout ---- */
+.container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+.section {
+    padding: var(--spacing-xxl) 0;
+    position: relative;
+    z-index: 1;
+}
+/* translucent so the shared WebGL canvas behind the page shows through */
+.alternate-bg {
+    background: var(--bg-alt);
+    border-block: 1px solid var(--border-color);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+.grid-2.top {
+    align-items: start;
+}
+
+.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.section-header {
+    margin-bottom: var(--spacing-xl);
+}
+.section-header h2 {
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    max-width: 16ch;
+}
+.grid-2 .section-header h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    max-width: none;
+}
+.section-lead {
+    font-size: 1.1rem;
+    max-width: 34ch;
+    margin-top: 1.5rem;
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0.85rem 1.7rem;
+    border-radius: var(--radius-full);
+    font: 500 0.85rem var(--font-primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+        transform var(--transition-base),
+        translate 0.5s var(--ease-out-expo),
+        background var(--transition-base),
+        box-shadow var(--transition-base);
+}
+.btn-primary {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--btn-shadow);
+}
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+.btn-secondary:hover {
+    background: var(--surface-hover);
+    transform: translateY(-2px);
+}

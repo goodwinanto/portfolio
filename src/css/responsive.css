@@ -1,0 +1,140 @@
+/* Breakpoints: 900px (stack columns) and 768px (phone layout, matches BREAKPOINT_DESKTOP in config.js) */
+@media (max-width: 900px) {
+    .services-layout,
+    .project-card {
+        grid-template-columns: 1fr;
+    }
+    .steps {
+        grid-template-columns: 1fr 1fr;
+    }
+    .services-intro {
+        position: static;
+    }
+    .project-card:nth-child(even) .project-media {
+        order: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .container,
+    .nav-content {
+        padding-inline: var(--gutter-mobile);
+    }
+    .section {
+        padding: 5rem 0;
+    }
+    .section-header {
+        margin-bottom: 3rem;
+    }
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .scroll-indicator {
+        left: var(--gutter-mobile);
+    }
+
+    .nav-content {
+        gap: 0.5rem;
+    }
+    .btn-hire {
+        display: none;
+    }
+    .nav-tools {
+        margin-left: auto;
+    }
+    .mobile-menu-btn {
+        display: block;
+        order: 1; /* after the theme/sound tools, at the far right */
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--menu-bg);
+        backdrop-filter: blur(12px);
+        padding: 1rem var(--gutter-mobile) 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .nav-links.is-open {
+        display: flex;
+    }
+    .nav-links a {
+        width: 100%;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+    }
+    .nav-links .nav-cta-mobile {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 1rem;
+        background: var(--btn-bg);
+        color: var(--btn-fg);
+        border-radius: var(--radius-full);
+    }
+
+    .hero-cta .btn,
+    .contact-links .btn {
+        width: 100%;
+    }
+    .steps {
+        grid-template-columns: 1fr;
+    }
+    .step-n {
+        margin-bottom: 1.5rem;
+    }
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+    .contact-links {
+        flex-direction: column;
+    }
+    .faq summary {
+        font-size: 1.15rem;
+    }
+    /* phones get no hero raster (see the <picture> source); this CSS core gives the depth instead */
+    .layer-core img {
+        display: none;
+    }
+    .layer-core .depth::before {
+        content: '';
+        position: absolute;
+        right: -35%;
+        top: 12%;
+        width: 105vw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background:
+            repeating-radial-gradient(circle, transparent 0 22px, var(--accent-line) 23px 24px, transparent 25px 46px),
+            radial-gradient(circle at 40% 40%, var(--orb-a), transparent 65%);
+        mask-image: radial-gradient(circle, #000 25%, transparent 70%);
+        transform: perspective(600px) rotateX(55deg) rotateZ(-20deg);
+        opacity: 0.6;
+    }
+    .filter-bar {
+        margin-top: -1.5rem;
+    }
+    .gl-stack {
+        width: min(100%, 240px);
+        margin-inline: auto;
+    }
+    .stack-legend {
+        text-align: center;
+    }
+    .gl-path {
+        margin: -1rem 0 1rem;
+    }
+    .gl-orbit {
+        width: min(100%, 220px);
+        margin-top: 0;
+    }
+    .gl-helix {
+        height: 200px;
+    }
+}
